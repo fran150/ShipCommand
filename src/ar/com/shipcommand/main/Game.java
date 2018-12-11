@@ -6,7 +6,7 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable {
 
     private Thread thread;
-    private boolean running;
+    private boolean running = false;
 
     public static void main(String args[]) {
         new Game();
@@ -45,28 +45,28 @@ public class Game extends Canvas implements Runnable {
                 System.out.println("FPS:" + frames);
                 frames = 0;
             }
-
-            stop();
         }
+
+        stop();
     }
 
     private void tick() {
+    }
+
+    private void render() {
         BufferStrategy bs = this.getBufferStrategy();
+
         if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
 
         Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.blue);
-        g.drawRect(0,0, 640,480);
+        g.setColor(Color.green);
+        g.fillRect(0,0, 640,480);
 
         g.dispose();
         bs.show();
-    }
-
-    private void render() {
-
     }
 
     public synchronized void start() {
