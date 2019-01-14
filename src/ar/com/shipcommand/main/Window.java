@@ -3,8 +3,19 @@ package ar.com.shipcommand.main;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a window in the game
+ */
 public class Window extends Canvas {
 
+    /**
+     * Creates a centered window in the game
+     *
+     * @param width Width of the window
+     * @param height Height of the window
+     * @param title Title of the window
+     * @param game Game object
+     */
     public Window(int width, int height, String title, Game game) {
         JFrame frame = new JFrame(title);
 
@@ -22,7 +33,5 @@ public class Window extends Canvas {
         frame.add(game);
 
         frame.setVisible(true);
-
-        game.start();
     }
 }

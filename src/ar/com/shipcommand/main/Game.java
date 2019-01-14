@@ -1,19 +1,27 @@
 package ar.com.shipcommand.main;
 
+import ar.com.shipcommand.gfx.IRenderizable;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.HashSet;
 
 public class Game extends Canvas implements Runnable {
-
+    private Window mainWindow;
     private Thread thread;
     private boolean running = false;
 
+    HashSet<IGameObject> gameObjects;
+
     public static void main(String args[]) {
-        new Game();
+        Game current = new Game();
     }
 
     public Game() {
-        new Window(640, 480, "Ship Command", this);
+        gameObjects = new HashSet<>();
+        gameObjects.add(new Test());
+        mainWindow = new Window(1024, 768, "Ship Command", this);
+        start();
     }
 
     public void run() {
@@ -25,17 +33,27 @@ public class Game extends Canvas implements Runnable {
         int frames = 0;
 
         while (running) {
+            BufferStrategy bs = this.getBufferStrategy();
+
+            if (bs == null) {
+                this.createBufferStrategy(3);
+                continue;
+            }
+
+            Graphics g = bs.getDrawGraphics();
+
             long now = System.nanoTime();
             delta += (now - lastTime) / ns;
             lastTime = now;
 
-            while (delta >= 1) {
-                tick();
-                delta--;
-            }
-
             if (running) {
-                render();
+                for (IGameObject object : gameObjects) {
+                    if (object instanceof IRenderizable) {
+                        ((IRenderizable) object).render(delta, g);
+                    }
+
+                    object.timestep(delta);
+                }
             }
 
             frames++;
@@ -45,28 +63,12 @@ public class Game extends Canvas implements Runnable {
                 System.out.println("FPS:" + frames);
                 frames = 0;
             }
+
+            g.dispose();
+            bs.show();
         }
 
         stop();
-    }
-
-    private void tick() {
-    }
-
-    private void render() {
-        BufferStrategy bs = this.getBufferStrategy();
-
-        if (bs == null) {
-            this.createBufferStrategy(3);
-            return;
-        }
-
-        Graphics g = bs.getDrawGraphics();
-        g.setColor(Color.green);
-        g.fillRect(0,0, 640,480);
-
-        g.dispose();
-        bs.show();
     }
 
     public synchronized void start() {
