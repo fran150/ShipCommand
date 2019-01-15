@@ -12,7 +12,7 @@ public class GameLoop {
     static double NANO_SECONDS = 1000000000;
     static double PHYSICS_STEP_SIZE = 0.1;
 
-    HashSet<Window> windows;
+    HashSet<IRenderable> renderables;
     HashSet<IGameObject> gameObjects;
 
     double fps = 0;
@@ -20,27 +20,13 @@ public class GameLoop {
     public GameLoop(Game game) {
         this.game = game;
 
-        windows = new HashSet<>();
+        renderables = new HashSet<>();
         gameObjects = new HashSet<>();
     }
 
-    /**
-     * Add the specified object to the game loop
-     *
-     * If the object is a window, then a window is added to the game loop
-     * If the object is renderable, then its added to the main window
-     * If the object is a game object then is added to the main physics loop
-     *
-     * @param object Object to add to the game loop (must be a Window, IRenderable, IGameObject)
-     */
     public void add(Object object) {
-        if (object instanceof Window) {
-            windows.add((Window) object);
-        }
-
         if (object instanceof IRenderable) {
-            Window main = game.getMainWindow();
-            main.renderables.add((IRenderable) object);
+            renderables.add((IRenderable) object);
         }
 
         if (object instanceof IGameObject) {
@@ -48,51 +34,14 @@ public class GameLoop {
         }
     }
 
-    /**
-     * Add the specified object to the window list of
-     * @param object
-     * @param window
-     */
-    public void add(Object object, Window window) {
-        if (object instanceof IRenderable) {
-            window.renderables.add((IRenderable) object);
-        }
-
-        if (object instanceof IGameObject) {
-            if (!gameObjects.contains(object)) {
-                gameObjects.add((IGameObject) object);
-            }
-        }
-    }
-
     public void remove(Object object) {
-        if (object instanceof Window) {
-            windows.remove(object);
-        }
-
         if (object instanceof IGameObject) {
             gameObjects.remove(object);
         }
 
         if (object instanceof IRenderable) {
-            for (Window win : windows) {
-                win.renderables.remove(object);
-            }
+            renderables.remove(object);
         }
-    }
-
-    public void remove(Object object, Window window) {
-        if (object instanceof IRenderable) {
-            window.renderables.remove(object);
-        }
-
-        for (Window win : windows) {
-            if (win.renderables.contains(object)) {
-                return;
-            }
-        }
-
-        gameObjects.remove(object);
     }
 
     public void run() {
@@ -123,7 +72,7 @@ public class GameLoop {
                 // Remove used time from remaining physics time
                 physicStep -= 1.0;
 
-                // Step all gameobjects physics
+                // Step all game objects physics
                 for (IGameObject gameObject : gameObjects) {
                     gameObject.timestep(PHYSICS_STEP_SIZE);
                 }
@@ -131,7 +80,8 @@ public class GameLoop {
 
             // If game is running render each object
             if (game.isRunning()) {
-                Window win = game.getMainWindow();
+                MainWindow win = game.getMainWindow();
+
                 // Get a buffer strategy
                 BufferStrategy bs = win.getBufferStrategy();
 
@@ -145,8 +95,8 @@ public class GameLoop {
                 Graphics graphics = bs.getDrawGraphics();
 
                 // Render all objects
-                for (IRenderable window : windows) {
-                    window.render(graphics, dt);
+                for (IRenderable object : renderables) {
+                    object.render(graphics, dt);
                 }
 
                 // Dispose graphics system and draw buffer

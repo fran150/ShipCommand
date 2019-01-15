@@ -1,7 +1,7 @@
 package ar.com.shipcommand.main;
 
 public class Game implements Runnable {
-    private Window mainWindow;
+    private MainWindow mainWindow;
     private Thread thread;
     private boolean running = false;
 
@@ -12,7 +12,7 @@ public class Game implements Runnable {
     }
 
     public Game() {
-        mainWindow = new Window(1024, 768, "Ship Command");
+        mainWindow = new MainWindow(1024, 768, "Ship Command");
         gameLoop = new GameLoop(this);
 
         Test test = new Test();
@@ -25,7 +25,7 @@ public class Game implements Runnable {
         return running;
     }
 
-    public Window getMainWindow() {
+    public MainWindow getMainWindow() {
         return mainWindow;
     }
 

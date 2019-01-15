@@ -1,28 +1,20 @@
 package ar.com.shipcommand.main;
 
-import ar.com.shipcommand.gfx.IRenderable;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashSet;
 
 /**
  * Represents a window in the game
  */
-public class Window extends Canvas implements IRenderable {
-
-    HashSet<IRenderable> renderables;
-
+public class MainWindow extends Canvas {
     /**
-     * Creates a centered window
+     * Creates the main game window
      *
      * @param width Width of the window
      * @param height Height of the window
      * @param title Title of the window
      */
-    public Window(int width, int height, String title) {
-        renderables = new HashSet<>();
-
+    public MainWindow(int width, int height, String title) {
         JFrame frame = new JFrame(title);
 
         Dimension dimension = new Dimension(width, height);
@@ -39,11 +31,5 @@ public class Window extends Canvas implements IRenderable {
         frame.add(this);
 
         frame.setVisible(true);
-    }
-
-    public void render(Graphics graphics, double dt) {
-        for (IRenderable renderable : renderables) {
-            renderable.render(graphics, dt);
-        }
     }
 }
