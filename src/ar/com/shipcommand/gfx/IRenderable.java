@@ -12,5 +12,5 @@ public interface IRenderable {
      * @param dt Time elapsed from previous time step
      * @param graphics Graphics object reference
      */
-    void render(Graphics graphics, double dt);
+    void render(Graphics2D graphics, double dt);
 }
