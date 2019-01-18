@@ -1,78 +1,121 @@
 package ar.com.shipcommand.main;
 
-import ar.com.shipcommand.input.KeyHandler;
-import ar.com.shipcommand.input.MouseHandler;
-
+/**
+ * Main game class
+ */
 public class Game implements Runnable {
-    private MainWindow mainWindow;
-    private Thread thread;
+    private static MainWindow mainWindow;
+    private static Thread thread;
 
-    private boolean running = false;
-    private boolean physicsRunning = false;
+    private static boolean running = false;
+    private static boolean physicsRunning = false;
 
-    private GameLoop gameLoop;
+    private static GameLoop gameLoop;
 
+    /**
+     * Called when application is loop.
+     *
+     * Initializes the game and starts it.
+     *
+     * @param args command line arguments
+     */
     public static void main(String args[]) {
-        new Game();
+        Game.init(args);
+        Game.start();
     }
 
-    public Game() {
+    /**
+     * Initialize main window and game loop
+     */
+    protected static void init(String args[]) {
         mainWindow = new MainWindow(1024, 768, "Ship Command");
-        mainWindow.addKeyListener(new KeyHandler());
 
-        MouseHandler mouseHandler = new MouseHandler();
-        mainWindow.addMouseListener(mouseHandler);
-        mainWindow.addMouseMotionListener(mouseHandler);
-        mainWindow.addMouseWheelListener(mouseHandler);
-
-        gameLoop = new GameLoop(this);
-
+        gameLoop = new GameLoop();
         initialize();
-
-        start();
     }
 
-    private void initialize() {
+    /**
+     * Initialize the game
+     */
+    private static void initialize() {
         Test test = new Test();
         gameLoop.add(test);
         runPhysics();
     }
 
-    public boolean isRunning() {
+    /**
+     * Return if game is running
+     *
+     * @return True game is running
+     */
+    public static boolean isRunning() {
         return running;
     }
 
-    public boolean isPhysicsRunning() {
+    /**
+     * Return if physics engine is running.
+     *
+     * When physics engine is stopped, only the render loop is processed
+     *
+     * @return True if the physics engine is running
+     */
+    public static boolean isPhysicsRunning() {
         return physicsRunning;
     }
 
-    public void runPhysics() {
+    /**
+     * Run the physics engine
+     */
+    public static void runPhysics() {
         physicsRunning = true;
     }
 
-    public void stopPhysics() {
+    /**
+     * Stop the physics engine
+     */
+    public static void stopPhysics() {
         physicsRunning = false;
     }
 
-    public MainWindow getMainWindow() {
+    /**
+     * Returns the game's main window object
+     *
+     * @return Main window of the game
+     */
+    public static MainWindow getMainWindow() {
         return mainWindow;
     }
 
-    public GameLoop getGameLoop() {
+
+    /**
+     * Returns the game loop object
+     *
+     * @return Game loop object
+     */
+    public static GameLoop getGameLoop() {
         return gameLoop;
     }
 
+    /**
+     * Method executed by the main game thread
+     */
     public void run() {
-        gameLoop.run();
+        gameLoop.loop();
     }
 
-    public synchronized void start() {
-        thread = new Thread(this);
+    /**
+     * Starts the main game thread
+     */
+    public static synchronized void start() {
+        thread = new Thread(new Game());
         thread.start();
         running = true;
     }
 
-    public synchronized void stop() {
+    /**
+     * Stops the main game thread
+     */
+    public static synchronized void stop() {
         try {
             thread.join();
             running = false;

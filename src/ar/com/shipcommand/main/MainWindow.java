@@ -1,5 +1,8 @@
 package ar.com.shipcommand.main;
 
+import ar.com.shipcommand.input.KeyHandler;
+import ar.com.shipcommand.input.MouseHandler;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -15,6 +18,19 @@ public class MainWindow extends Canvas {
      * @param title Title of the window
      */
     public MainWindow(int width, int height, String title) {
+        initMainWindow(width, height, title);
+        initKeyboardHandler();
+        initMouseHandler();
+    }
+
+    /**
+     * Initialize main game window
+     *
+     * @param width Main game window width
+     * @param height Main game window height
+     * @param title Window title
+     */
+    protected void initMainWindow(int width, int height, String title) {
         JFrame frame = new JFrame(title);
 
         Dimension dimension = new Dimension(width, height);
@@ -31,5 +47,22 @@ public class MainWindow extends Canvas {
         frame.add(this);
 
         frame.setVisible(true);
+    }
+
+    /**
+     * Attach a keyboard handler to the window
+     */
+    protected void initKeyboardHandler() {
+        addKeyListener(new KeyHandler());
+    }
+
+    /**
+     * Attach a mouse handler to the window
+     */
+    protected void initMouseHandler() {
+        MouseHandler mouseHandler = new MouseHandler();
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
+        addMouseWheelListener(mouseHandler);
     }
 }

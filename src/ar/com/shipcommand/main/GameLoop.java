@@ -1,33 +1,49 @@
 package ar.com.shipcommand.main;
 
 import ar.com.shipcommand.gfx.IRenderable;
-import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.input.MouseHandler;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.util.HashSet;
 
+/**
+ * Main game loop implementation
+ */
 public class GameLoop {
-    Game game;
+    /**
+     * Number of nano seconds in a second
+     */
+    private static double NANO_SECONDS = 1000000000;
+    /**
+     * Number of physics steps per second
+     */
+    private static double PHYSICS_STEP_SIZE = 60;
+    /**
+     * Time for each physics step
+     */
+    private static double FRAME_TIME = 1.0 / PHYSICS_STEP_SIZE;
 
-    static double NANO_SECONDS = 1000000000;
-    static double PHYSICS_STEP_SIZE = 60;
-    static double FRAME_TIME = 1.0 / PHYSICS_STEP_SIZE;
+    private HashSet<IRenderable> renderables;
+    private HashSet<IGameObject> gameObjects;
 
-    HashSet<IRenderable> renderables;
-    HashSet<IGameObject> gameObjects;
 
-    int fps = 0;
-    int tps = 0;
+    private int fps = 0;
+    private int tps = 0;
 
-    public GameLoop(Game game) {
-        this.game = game;
-
+    /**
+     * Creates a new game loop
+     */
+    public GameLoop() {
         renderables = new HashSet<>();
         gameObjects = new HashSet<>();
     }
 
+    /**
+     * Adds the specified object to the game loop
+     *
+     * @param object Can be a IRenderable and / or IGameObject.
+     */
     public void add(Object object) {
         if (object instanceof IRenderable) {
             renderables.add((IRenderable) object);
@@ -38,6 +54,11 @@ public class GameLoop {
         }
     }
 
+    /**
+     * Removes the specified object to the game loop
+     *
+     * @param object Can be a IRenderable and / or IGameObject.
+     */
     public void remove(Object object) {
         if (object instanceof IGameObject) {
             gameObjects.remove(object);
@@ -48,8 +69,14 @@ public class GameLoop {
         }
     }
 
+    /**
+     * Render step of the game loop
+     *
+     * @param dt Delta time for this step
+     */
     private void render(double dt) {
-        MainWindow win = game.getMainWindow();
+        // Gets the game's main window
+        MainWindow win = Game.getMainWindow();
 
         // Get a buffer strategy
         BufferStrategy bs = win.getBufferStrategy();
@@ -76,6 +103,11 @@ public class GameLoop {
         bs.show();
     }
 
+    /**
+     * Time step for all game objects
+     *
+     * @param dt Delta time for this step
+     */
     private void timestep(double dt) {
         // Step all game objects physics
         for (IGameObject gameObject : gameObjects) {
@@ -83,7 +115,10 @@ public class GameLoop {
         }
     }
 
-    public void run() {
+    /**
+     * Loop the objects in the game
+     */
+    public void loop() {
         // Time step size
         double dt = 0;
         // Current physics time step size
@@ -97,7 +132,7 @@ public class GameLoop {
         int rFrames = 0;
         int tFrames = 0;
 
-        while (game.isRunning()) {
+        while (Game.isRunning()) {
             // Get current nano time
             long now = System.nanoTime();
 
@@ -105,7 +140,7 @@ public class GameLoop {
             dt = (now - lastTime) / NANO_SECONDS;
             lastTime = now;
 
-            if (game.isPhysicsRunning()) {
+            if (Game.isPhysicsRunning()) {
                 // Calculate time remaining for one physics step
                 physicStep += dt;
 
