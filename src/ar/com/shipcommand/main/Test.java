@@ -12,7 +12,7 @@ public class Test implements IGameObject, IRenderable {
     double x = 100;
     double y = 100;
 
-    public void timestep(double dt) {
+    public void timeStep(double dt) {
         if (KeyHandler.isDown(KeyEvent.VK_D)) {
             x += 5;
         }

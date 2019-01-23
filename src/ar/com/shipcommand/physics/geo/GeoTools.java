@@ -1,7 +1,8 @@
-package ar.com.shipcommand.geo;
+package ar.com.shipcommand.physics.geo;
 
-import ar.com.shipcommand.geo.exceptions.AmbiguousSolutionException;
-import ar.com.shipcommand.geo.exceptions.InfiniteSolutionsException;
+import ar.com.shipcommand.physics.Distance;
+import ar.com.shipcommand.physics.geo.exceptions.AmbiguousSolutionException;
+import ar.com.shipcommand.physics.geo.exceptions.InfiniteSolutionsException;
 
 /**
  * Collection of tools to calculate geographical data
@@ -16,7 +17,7 @@ public class GeoTools {
      * @param end End position
      * @return Distance in meters between the given points
      */
-    public static double getDistance(Geo2DPosition start, Geo2DPosition end) {
+    public static Distance getDistance(Geo2DPosition start, Geo2DPosition end) {
         double φ1 = start.getLatRadians();
         double φ2 = end.getLatRadians();
 
@@ -29,7 +30,7 @@ public class GeoTools {
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return GeoConsts.EARTH_RADIUS * c;
+        return new Distance(GeoConsts.EARTH_RADIUS * c);
     }
 
     /**
@@ -59,21 +60,20 @@ public class GeoTools {
      * @param distance Distance in meters
      * @return New position calculated from the given parameters
      */
-    public static Geo2DPosition GetPosition(Geo2DPosition start, double bearing, double distance) {
+    public static Geo2DPosition movePosition(Geo2DPosition start, double bearing, Distance distance) {
         double φ = start.getLatRadians();
         double λ = start.getLonRadians();
 
         double θ = Math.toRadians(bearing);
-        double δ = distance / GeoConsts.EARTH_RADIUS;
+        double δ = distance.inMeters() / GeoConsts.EARTH_RADIUS;
 
 
         double φ2 = Math.asin(Math.sin(φ)*Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));
         double λ2 = λ + Math.atan2(Math.sin(θ) * Math.sin(δ) * Math.cos(φ), Math.cos(δ) - Math.sin(φ) * Math.sin(φ2));
 
-        Geo2DPosition newPosition = new Geo2DPosition();
-        newPosition.setPostionRadians(φ2, λ2);
+        start.setPostionRadians(φ2, λ2);
 
-        return newPosition;
+        return start;
     }
 
     /**
@@ -85,7 +85,7 @@ public class GeoTools {
      * @param bearing2 Bearing of second path
      * @return Position at intersection
      */
-    public static Geo2DPosition Intersection(Geo2DPosition p1, double bearing1, Geo2DPosition p2, double bearing2)
+    public static Geo2DPosition intersection(Geo2DPosition p1, double bearing1, Geo2DPosition p2, double bearing2)
         throws AmbiguousSolutionException, InfiniteSolutionsException {
         // Input parameters
         double φ1 = p1.getLatRadians();

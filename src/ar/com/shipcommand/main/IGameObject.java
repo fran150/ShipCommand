@@ -9,5 +9,5 @@ public interface IGameObject {
      *
      * @param dt Time passed since last update
      */
-    void timestep(double dt);
+    void timeStep(double dt);
 }

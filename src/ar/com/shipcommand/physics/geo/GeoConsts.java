@@ -1,4 +1,4 @@
-package ar.com.shipcommand.geo;
+package ar.com.shipcommand.physics.geo;
 
 /**
  * Collection of constants to be used on geographical calculations

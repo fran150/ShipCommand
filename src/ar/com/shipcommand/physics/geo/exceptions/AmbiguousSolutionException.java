@@ -1,4 +1,4 @@
-package ar.com.shipcommand.geo.exceptions;
+package ar.com.shipcommand.physics.geo.exceptions;
 
 /**
  * Exception produced when a trigonometry operation has ambiguous solutions

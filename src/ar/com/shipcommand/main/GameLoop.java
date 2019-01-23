@@ -111,7 +111,7 @@ public class GameLoop {
     private void timestep(double dt) {
         // Step all game objects physics
         for (IGameObject gameObject : gameObjects) {
-            gameObject.timestep(dt);
+            gameObject.timeStep(dt);
         }
     }
 

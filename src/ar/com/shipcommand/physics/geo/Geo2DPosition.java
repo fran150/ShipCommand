@@ -1,11 +1,13 @@
-package ar.com.shipcommand.geo;
+package ar.com.shipcommand.physics.geo;
+
+import ar.com.shipcommand.physics.Distance;
 
 /**
  * Geographical position of an object
  */
 public class Geo2DPosition {
-    double lat;
-    double lon;
+    private double lat;
+    private double lon;
 
     /**
      * Get the current latitude
@@ -115,5 +117,34 @@ public class Geo2DPosition {
      */
     public Geo2DPosition(double lat, double lon) {
         setPosition(lat, lon);
+    }
+
+    /**
+     * Creates a copy of the current position
+     *
+     * @return new position
+     */
+    public Geo2DPosition clone() {
+        return new Geo2DPosition(this.lat, this.lon);
+    }
+
+    /**
+     * Copies the specified position to this one
+     *
+     * @param pos Position to copy
+     */
+    public void copy(Geo2DPosition pos) {
+        this.lat = pos.getLat();
+        this.lon = pos.getLon();
+    }
+
+    /**
+     * Move the current position
+     *
+     * @param distance Distance to move
+     * @param course Course in degrees from north
+     */
+    public void move(Distance distance, double course) {
+        Geo2DPosition newPosition = GeoTools.movePosition(this, course, distance);
     }
 }
