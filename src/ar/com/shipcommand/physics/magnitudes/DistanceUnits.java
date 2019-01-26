@@ -1,4 +1,4 @@
-package ar.com.shipcommand.physics;
+package ar.com.shipcommand.physics.magnitudes;
 
 public enum DistanceUnits {
     Meters,

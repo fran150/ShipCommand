@@ -2,25 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="175ec548-fbda-4ef2-bc02-dcd6a5be4b5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/Distance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/DistanceUnits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/Speed.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/SpeedUnits.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/Geo2DPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/Geo3DPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/GeoConsts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoConsts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/GeoTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/exceptions/AmbiguousSolutionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/geo/exceptions/InfiniteSolutionsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/GameLoop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/main/GameLoop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/main/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/platforms/Airborne.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/platforms/Platform.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/platforms/Submarine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/platforms/SurfaceShip.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/Distance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Distance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/DistanceUnits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/Speed.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Speed.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/SpeedUnits.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,14 +23,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="68" selection-start-line="68" selection-end-line="68" />
+            <state relative-caret-position="3128">
+              <caret line="209" selection-start-line="209" selection-end-line="209" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -61,6 +71,7 @@
       <find>amountOfTicks</find>
       <find>timer</find>
       <find>game</find>
+      <find>180</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -109,6 +120,9 @@
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java" />
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java" />
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" />
+        <option value="$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java" />
+        <option value="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfileItem.java" />
+        <option value="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" />
       </list>
     </option>
   </component>
@@ -126,6 +140,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -149,7 +165,7 @@
               <item name="ShipCommand" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="shipcommand" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="physics" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ShipCommand" type="b2602c69:ProjectViewProjectNode" />
@@ -162,12 +178,10 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548279002321" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548467008915" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -248,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1547843699148</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added basic integration&#10;&#10;Changed distance and speed magnitudes as object&#10;Changed timestep method to timeStep">
+      <created>1548279181020</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1548279181020</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -262,9 +283,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21558245" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22163388" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -275,13 +295,13 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.43862522" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.43862522" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.3927987" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49924356" weight="0.3927987" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49924356" visible="true" weight="0.599018" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -339,7 +359,8 @@
     <MESSAGE value="Simplify render loop" />
     <MESSAGE value="Added key and mouse handlers, work on game loop" />
     <MESSAGE value="Game methods moved to static" />
-    <option name="LAST_COMMIT_MESSAGE" value="Game methods moved to static" />
+    <MESSAGE value="Added basic integration&#10;&#10;Changed distance and speed magnitudes as object&#10;Changed timestep method to timeStep" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added basic integration&#10;&#10;Changed distance and speed magnitudes as object&#10;Changed timestep method to timeStep" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pom.xml" />
@@ -463,24 +484,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/Distance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1375">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-          <folding>
-            <element signature="e#410#411#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/DistanceUnits.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
@@ -489,13 +492,6 @@
             <element signature="e#2598#2599#0" expanded="true" />
             <element signature="e#2658#2659#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/SpeedUnits.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -520,19 +516,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/Speed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-610">
-          <caret line="44" column="9" lean-forward="true" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
-          <folding>
-            <element signature="e#2071#2072#0" expanded="true" />
-            <element signature="e#2125#2126#0" expanded="true" />
-            <element signature="e#2269#2270#0" expanded="true" />
-            <element signature="e#2322#2323#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -550,13 +533,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Distance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Speed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfileItem.java" />
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="68" selection-start-line="68" selection-end-line="68" />
+        <state relative-caret-position="3128">
+          <caret line="209" selection-start-line="209" selection-end-line="209" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>

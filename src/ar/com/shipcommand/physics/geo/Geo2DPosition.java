@@ -1,6 +1,6 @@
 package ar.com.shipcommand.physics.geo;
 
-import ar.com.shipcommand.physics.Distance;
+import ar.com.shipcommand.physics.magnitudes.Distance;
 
 /**
  * Geographical position of an object

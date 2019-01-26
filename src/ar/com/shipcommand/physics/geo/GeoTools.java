@@ -1,6 +1,6 @@
 package ar.com.shipcommand.physics.geo;
 
-import ar.com.shipcommand.physics.Distance;
+import ar.com.shipcommand.physics.magnitudes.Distance;
 import ar.com.shipcommand.physics.geo.exceptions.AmbiguousSolutionException;
 import ar.com.shipcommand.physics.geo.exceptions.InfiniteSolutionsException;
 
