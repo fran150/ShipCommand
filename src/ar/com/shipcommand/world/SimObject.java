@@ -11,7 +11,7 @@ import ar.com.shipcommand.physics.geo.Geo3DPosition;
  * It has a definite position and state (velocity and acceleration)
  * It inherits from game objects and on each time step it integrates the new position
  */
-public class SimObject implements IGameObject {
+public abstract class SimObject implements IGameObject {
     private Geo3DPosition position;
     private double course;
     private double diveAngle;

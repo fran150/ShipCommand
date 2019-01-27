@@ -2,20 +2,20 @@ package ar.com.shipcommand.physics;
 
 import ar.com.shipcommand.physics.magnitudes.Speed;
 
-public class AccelProfile {
-    protected class AccelProfileNode {
+public class DragProfile {
+    protected class DragProfileNode {
         Speed speed;
         Speed accel;
-        AccelProfileNode next = null;
-        AccelProfileNode prev = null;
+        DragProfileNode next = null;
+        DragProfileNode prev = null;
     }
 
-    private AccelProfileNode first = null;
-    private AccelProfileNode last = null;
-    private AccelProfileNode current = null;
+    private DragProfileNode first = null;
+    private DragProfileNode last = null;
+    private DragProfileNode current = null;
 
     public void add(Speed speed, Speed accel) {
-        AccelProfileNode node = new AccelProfileNode();
+        DragProfileNode node = new DragProfileNode();
         node.speed = speed;
         node.accel = accel;
 
@@ -58,9 +58,12 @@ public class AccelProfile {
             double y1 = current.next.accel.inMetersPerSecond();
 
             double y = ((y0 * (x1 - x)) + (y1 * (x - x0))) / (x1 - x0);
-            accel.setMetersPerSecond(y * ratio);
+            accel.setMetersPerSecond(-y * (1 - ratio));
         } else {
-            accel.setMetersPerSecond(0);
+            double maxSpeed = current.speed.inMetersPerSecond();
+            double maxDrag = current.accel.inMetersPerSecond();
+
+            accel.setMetersPerSecond(-(ms * maxDrag) / maxSpeed);
         }
     }
 }
