@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/pom.xml" line="12" mnemonic="5" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="175ec548-fbda-4ef2-bc02-dcd6a5be4b5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/fran150.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/DragProfile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/TurnProfile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShipCommand.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ShipCommand.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/gfx/IRenderable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/input/KeyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/input/MouseHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/GameLoop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/IGameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/MainWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/AccelProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/DragProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/TurnProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/Geo3DPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/GeoConsts.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/GeoTools.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/Distance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/Speed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/world/Platform.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/world/SimObject.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +43,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="92">
+              <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -49,6 +85,11 @@
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -89,14 +130,27 @@
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" />
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/physics/DragProfile.java" />
         <option value="$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java" />
+        <option value="$PROJECT_DIR$/ShipCommand.iml" />
+        <option value="$PROJECT_DIR$/.idea/compiler.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Ship Command Game" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="10" />
-    <option name="y" value="20" />
-    <option name="width" value="1346" />
-    <option name="height" value="688" />
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -106,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -116,29 +169,29 @@
             </path>
             <path>
               <item name="ShipCommand" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShipCommand" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ShipCommand" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ShipCommand" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="shipcommand" type="462c0819:PsiDirectoryNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548604960331" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548629423477" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\fran150\Desarrollo\ShipCommand\src\main" />
+      <recent name="C:\Users\fran150\Desarrollo\ShipCommand\src\java" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -228,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1548605034269</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added accel, drag and turn profiles and platform integration">
+      <created>1548605094816</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1548605094816</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -243,30 +303,30 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21255673" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49829352" visible="true" weight="0.21558245" />
+      <window_info id="Structure" order="1" sideWeight="0.5017065" side_tool="true" visible="true" weight="0.21558245" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
-      <window_info id="Learn" order="6" />
+      <window_info id="Learn" order="6" weight="0.32980332" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43862522" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49848714" weight="0.43862522" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3289689" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.3927987" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49924356" visible="true" weight="0.3927987" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49848714" visible="true" weight="0.5204583" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49924356" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
+      <window_info anchor="right" id="Maven" order="4" weight="0.32980332" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
@@ -323,43 +383,31 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added accel, drag and turn profiles and platform integration" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Window.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java" />
-    <entry file="file://$PROJECT_DIR$/ShipCommand.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/GameObject.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/src.zip!/java/awt/Component.java" />
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" selection-start-line="2" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/gfx/IRenderable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/IRenderable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="26" selection-start-line="14" selection-start-column="26" selection-end-line="14" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/input/KeyHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/input/KeyHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-317">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
@@ -371,27 +419,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/input/MouseHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1723">
-          <caret line="120" column="53" selection-start-line="120" selection-start-column="53" selection-end-line="120" selection-end-column="53" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/GameLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="176" lean-forward="true" selection-start-line="176" selection-end-line="176" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
@@ -403,7 +431,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/Game.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
@@ -431,14 +459,14 @@
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/platforms/SurfaceShip.java" />
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/platforms/Submarine.java" />
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/Integrator.java" />
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoConsts.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoConsts.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="393">
           <caret line="144" column="39" lean-forward="true" selection-start-line="144" selection-start-column="39" selection-end-line="144" selection-end-column="39" />
@@ -449,7 +477,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoTools.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="433">
           <caret line="75" column="20" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
@@ -459,7 +487,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo3DPosition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
@@ -470,35 +498,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/IGameObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="14" selection-start-line="11" selection-start-column="14" selection-end-line="11" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Distance.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/magnitudes/Distance.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Speed.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/magnitudes/Speed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
@@ -506,28 +534,28 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfileItem.java" />
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/TurnProfile.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/TurnProfile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/DragProfile.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/DragProfile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="60" column="53" selection-start-line="60" selection-start-column="53" selection-end-line="60" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/AccelProfile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/world/SimObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3023">
           <caret line="16" column="29" lean-forward="true" selection-start-line="16" selection-start-column="29" selection-end-line="16" selection-end-column="29" />
@@ -537,7 +565,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/world/Platform.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="46" column="35" lean-forward="true" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
@@ -547,13 +575,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ar/com/shipcommand/main/Test.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="40" column="48" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11572" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/compiler.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ShipCommand.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="63" selection-start-line="2" selection-start-column="63" selection-end-line="2" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/input/MouseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="92">
+          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
         </state>
       </provider>
     </entry>
