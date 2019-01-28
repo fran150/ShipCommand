@@ -10,6 +10,9 @@ import java.awt.*;
  * Represents a window in the game
  */
 public class MainWindow extends Canvas {
+    private int width;
+    private int height;
+
     /**
      * Creates the main game window
      *
@@ -18,19 +21,38 @@ public class MainWindow extends Canvas {
      * @param title Title of the window
      */
     public MainWindow(int width, int height, String title) {
-        initMainWindow(width, height, title);
+        this.width = width;
+        this.height = height;
+
+        initMainWindow(title);
         initKeyboardHandler();
         initMouseHandler();
     }
 
     /**
+     * Returns the current width of the window
+     *
+     * @return in pixels
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * Returns the current height of the window
+     *
+     * @return in pixels
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
      * Initialize main game window
      *
-     * @param width Main game window width
-     * @param height Main game window height
      * @param title Window title
      */
-    protected void initMainWindow(int width, int height, String title) {
+    protected void initMainWindow(String title) {
         JFrame frame = new JFrame(title);
 
         Dimension dimension = new Dimension(width, height);

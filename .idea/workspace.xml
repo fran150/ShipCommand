@@ -5,34 +5,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="175ec548-fbda-4ef2-bc02-dcd6a5be4b5e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__c3p0_c3p0_0_9_1_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_core_1_10_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_kms_1_10_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_amazonaws_aws_java_sdk_s3_1_10_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_beust_jcommander_1_35.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_5_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_5_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_18_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_protobuf_protobuf_java_2_5_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_cdm_4_6_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_httpservices_4_6_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_netcdf4_4_6_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__edu_ucar_udunits_4_6_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__joda_time_joda_time_2_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_11.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_java_dev_jna_jna_4_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_jcip_jcip_annotations_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpmime_4_5_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jdom_jdom2_2_0_4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_quartz_scheduler_quartz_2_2_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_api_1_7_7.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShipCommand.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ShipCommand.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/gfx/IRenderable.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/input/KeyHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/input/MouseHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/GameLoop.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/IGameObject.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/MainWindow.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/main/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/AccelProfile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/DragProfile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/TurnProfile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/Geo3DPosition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/GeoConsts.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/GeoTools.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/Distance.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/Speed.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/world/Platform.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/java/ar/com/shipcommand/world/SimObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/gfx/IRenderable.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/input/KeyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/input/MouseHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/GameLoop.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/IGameObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/MainWindow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/main/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/AccelProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/DragProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/TurnProfile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo2DPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/Geo3DPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoConsts.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/GeoTools.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/AmbiguousSolutionException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/geo/exceptions/InfiniteSolutionsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Distance.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/DistanceUnits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/Speed.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/physics/magnitudes/SpeedUnits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/world/Platform.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ar/com/shipcommand/world/SimObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -43,12 +72,38 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+            <state relative-caret-position="81">
+              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#818#819#0" expanded="true" />
+                <element signature="e#846#847#0" expanded="true" />
+                <element signature="e#972#973#0" expanded="true" />
+                <element signature="e#1001#1002#0" expanded="true" />
+                <element signature="e#1686#1687#0" expanded="true" />
+                <element signature="e#1734#1735#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,6 +188,8 @@
         <option value="$PROJECT_DIR$/ShipCommand.iml" />
         <option value="$PROJECT_DIR$/.idea/compiler.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java" />
       </list>
     </option>
   </component>
@@ -143,14 +200,20 @@
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="Ship Command Game" type="9519ce18:MavenProjectsStructure$ProjectNode" />
         </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="Ship Command Game" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
       </expand>
       <select />
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="676" />
-    <option name="width" value="697" />
-    <option name="height" value="735" />
+    <option name="x" value="10" />
+    <option name="y" value="20" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -160,6 +223,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -167,28 +231,24 @@
               <item name="ShipCommand" type="b2602c69:ProjectViewProjectNode" />
               <item name="ShipCommand" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="ShipCommand" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548629423477" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548708712297" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.repository.indices" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\P044117\Desarrollo\ShipCommand\src\main\resources" />
       <recent name="C:\Users\fran150\Desarrollo\ShipCommand\src\main" />
       <recent name="C:\Users\fran150\Desarrollo\ShipCommand\src\java" />
     </key>
@@ -303,7 +363,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49829352" visible="true" weight="0.21558245" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49829352" visible="true" weight="0.22768533" />
       <window_info id="Structure" order="1" sideWeight="0.5017065" side_tool="true" visible="true" weight="0.21558245" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -415,41 +475,6 @@
             <element signature="imports" expanded="true" />
             <element signature="e#650#651#0" expanded="true" />
             <element signature="e#696#697#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1398#1399#0" expanded="true" />
-            <element signature="e#1446#1447#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#974#975#0" expanded="true" />
-            <element signature="e#1004#1005#0" expanded="true" />
-            <element signature="e#1214#1215#0" expanded="true" />
-            <element signature="e#1251#1252#0" expanded="true" />
-            <element signature="e#1468#1469#0" expanded="true" />
-            <element signature="e#1505#1506#0" expanded="true" />
-            <element signature="e#1584#1585#0" expanded="true" />
-            <element signature="e#1622#1623#0" expanded="true" />
-            <element signature="e#1663#1664#0" expanded="true" />
-            <element signature="e#1696#1697#0" expanded="true" />
-            <element signature="e#1937#1938#0" expanded="true" />
-            <element signature="e#1968#1969#0" expanded="true" />
-            <element signature="e#2070#2071#0" expanded="true" />
-            <element signature="e#2100#2101#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -585,16 +610,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/GameLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-11572" />
@@ -629,10 +644,60 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="17" column="74" selection-start-line="17" selection-start-column="74" selection-end-line="17" selection-end-column="74" />
+        <state relative-caret-position="124">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/GameLoop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-646">
+          <caret line="37" column="34" selection-start-line="37" selection-start-column="34" selection-end-line="37" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-593">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="e#1505#1506#0" expanded="true" />
+            <element signature="e#1542#1543#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="11" column="7" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#846#847#0" expanded="true" />
+            <element signature="e#972#973#0" expanded="true" />
+            <element signature="e#1001#1002#0" expanded="true" />
+            <element signature="e#1686#1687#0" expanded="true" />
+            <element signature="e#1734#1735#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
