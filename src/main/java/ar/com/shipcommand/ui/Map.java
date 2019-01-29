@@ -5,6 +5,7 @@ import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.MainWindow;
 import ar.com.shipcommand.physics.geo.Geo2DPosition;
 import ucar.ma2.Array;
+import ucar.ma2.InvalidRangeException;
 import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
 
@@ -14,19 +15,27 @@ import java.io.IOException;
 public class Map implements IRenderable {
     NetcdfFile file;
     Variable z;
+    Array read = null;
 
     private Geo2DPosition upperLeft;
     private Geo2DPosition lowerRight;
 
-    private static int WIDTH = 21601;
-    private static int HEIGHT = 10801;
+    private static long GRID_WIDTH = 21601;
+    private static long GRID_HEIGHT = 10801;
 
     public Map() throws IOException {
-        file = NetcdfFile.open("resources/GRIDONE_1D.nc");
+        file = NetcdfFile.open("./src/main/resources/GRIDONE_1D.nc");
         z = file.findVariable("z");
 
-        upperLeft = new Geo2DPosition(90, -180);
-        lowerRight = new Geo2DPosition(-90, 180);
+        // World
+        upperLeft = new Geo2DPosition(-90, -180);
+        lowerRight = new Geo2DPosition(90, 180);
+
+        // Argentina
+        /*
+        upperLeft = new Geo2DPosition(5, -105);
+        lowerRight = new Geo2DPosition(63, -25);
+        */
     }
 
     /*
@@ -37,25 +46,39 @@ public class Map implements IRenderable {
      * 10801-----------------+
      */
 
+    public long posToGrid(Geo2DPosition position) {
+        return Math.round((Math.round((position.getLat() + 90) * 60) * GRID_WIDTH) + ((position.getLon() + 180) * 60));
+    }
+
     public void render(Graphics2D graphics, double dt) {
         MainWindow win = Game.getMainWindow();
 
         int winWidth = win.getWidth();
         int winHeight = win.getHeight();
 
-        double areaWidth = lowerRight.getLat() - upperLeft.getLat();
-        double areaHeight = lowerRight.getLon() - upperLeft.getLon();
+        double areaWidth = lowerRight.getLon() - upperLeft.getLon();
+        double areaHeight = lowerRight.getLat() - upperLeft.getLat();
 
-        double latPerPixel = areaWidth / winWidth;
-        double lonPerPixel = areaHeight / winHeight;
+        double lonPerPixel = areaWidth / winWidth;
+        double latPerPixel = areaHeight / winHeight;
 
+        Geo2DPosition currentLeft = upperLeft.clone();
 
-        /*
-        for (int y = 0; y < HEIGHT; y++) {
-            long start = WIDTH * (y * (10801 / HEIGHT));
-            long end = start + 21601;
+        Geo2DPosition currentRight = currentLeft.clone();
+        currentRight.setLon(currentRight.getLon() + areaWidth);
 
-            Array read = z.read(start + ":" + end + ":" + (21601 / WIDTH));
+        for (int y = 0; y < winHeight; y++) {
+            long start = posToGrid(currentLeft);
+            long end = posToGrid(currentRight);
+
+            try {
+                long step = Math.round(lonPerPixel * 60);
+                read = z.read(start + ":" + end + ":" + step);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InvalidRangeException e) {
+                e.printStackTrace();
+            }
 
             for (int x = 0; x < read.getSize(); x++) {
                 int depth = read.getInt(x);
@@ -65,26 +88,30 @@ public class Map implements IRenderable {
                     int c = blue.intValue();
 
                     Color color = new Color(0, 0, 255 - c);
-                    g.setColor(color);
+                    graphics.setColor(color);
                 } else {
                     if (depth > 2000) {
                         Double gray = ((depth - 2000) / 7000.0) * 255;
                         int c = gray.intValue();
 
                         Color color = new Color(c, c, c);
-                        g.setColor(color);
+                        graphics.setColor(color);
                     } else {
                         Double green = (depth / 2000.0) * 180;
                         int c = green.intValue();
 
                         Color color = new Color(0, 255 - c, 0);
-                        g.setColor(color);
+                        graphics.setColor(color);
                     }
                 }
 
-                g.fillRect(x, y, 1, 1);
+                graphics.fillRect(x, y, 1, 1);
             }
+
+            double newLat = currentLeft.getLat() + latPerPixel;
+
+            currentLeft.setLat(newLat);
+            currentRight.setLat(newLat);
         }
-*/
     }
 }

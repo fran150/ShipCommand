@@ -1,5 +1,9 @@
 package ar.com.shipcommand.main;
 
+import ar.com.shipcommand.ui.Map;
+
+import java.io.IOException;
+
 /**
  * Main game class
  */
@@ -39,7 +43,16 @@ public class Game implements Runnable {
      */
     private static void initialize() {
         Test test = new Test();
+        Map map = null;
+        try {
+            map = new Map();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        gameLoop.add(map);
         gameLoop.add(test);
+
         runPhysics();
     }
 

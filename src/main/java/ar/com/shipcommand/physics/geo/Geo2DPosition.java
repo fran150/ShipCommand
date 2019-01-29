@@ -57,7 +57,7 @@ public class Geo2DPosition {
      *
      * @param lon Decimal Longitude
      */
-    void setLon(double lon) {
+    public void setLon(double lon) {
         this.lon = lon;
     }
 
