@@ -15,7 +15,8 @@ import java.io.IOException;
 public class Map implements IRenderable {
     NetcdfFile file;
     Variable z;
-    Array read = null;
+    private double[] heights = null;
+
 
     private Geo2DPosition upperLeft;
     private Geo2DPosition lowerRight;
@@ -27,15 +28,18 @@ public class Map implements IRenderable {
         file = NetcdfFile.open("./src/main/resources/GRIDONE_1D.nc");
         z = file.findVariable("z");
 
+        MainWindow win = Game.getMainWindow();
+
         // World
+/**/
         upperLeft = new Geo2DPosition(-90, -180);
         lowerRight = new Geo2DPosition(90, 180);
-
+/**/
         // Argentina
-        /*
+/*
         upperLeft = new Geo2DPosition(5, -105);
         lowerRight = new Geo2DPosition(63, -25);
-        */
+*/
     }
 
     /*
@@ -50,68 +54,107 @@ public class Map implements IRenderable {
         return Math.round((Math.round((position.getLat() + 90) * 60) * GRID_WIDTH) + ((position.getLon() + 180) * 60));
     }
 
+    /*
+newR = currentR + (255 - currentR) * tint_factor
+newG = currentG + (255 - currentG) * tint_factor
+newB = currentB + (255 - currentB) * tint_factor
+     */
+
+    protected Color tint(double r, double g, double b, double factor) {
+        Double red = new Double(r + (255 - r) * factor);
+        Double green = new Double(g + (255 - g) * factor);
+        Double blue = new Double(b + (255 - b) * factor);;
+        return new Color(red.intValue(), green.intValue(), blue.intValue());
+    }
+
+    protected Color shade(double r, double g, double b, double factor) {
+        Double red = new Double(r * (1 - factor));
+        Double green = new Double(g * (1 - factor));
+        Double blue = new Double(b * (1 - factor));
+        return new Color(red.intValue(), green.intValue(), blue.intValue());
+    }
+
+    protected Color getColor(double depth) {
+        double factor = 0;
+        double r, g, b;
+        double maxFactor;
+
+        if (depth < 0) {
+            r = 0; g = 0; b = 255;
+            factor = (-1 * depth) / 11000.0;
+            return shade(r, g, b, factor);
+        } else {
+            if (depth > 1300) {
+                r = 205; g = 133; b = 63;
+                factor = ((depth - 1300) / 7000.0);
+                return shade(r, g, b, factor);
+            } else if (depth > 500 && depth <= 1300) {
+                r = 255; g = 255; b = 153;
+                factor = ((depth - 500) / 1800.0);
+                return shade(r, g, b, factor);
+            } else {
+                r = 0; g = 156; b = 76;
+                factor = (depth / 1000.0);
+                return tint(r, g, b, factor);
+            }
+
+        }
+    }
+
     public void render(Graphics2D graphics, double dt) {
         MainWindow win = Game.getMainWindow();
 
         int winWidth = win.getWidth();
-        int winHeight = win.getHeight();
+        int winHeight = winWidth / 2;
 
-        double areaWidth = lowerRight.getLon() - upperLeft.getLon();
-        double areaHeight = lowerRight.getLat() - upperLeft.getLat();
-
-        double lonPerPixel = areaWidth / winWidth;
-        double latPerPixel = areaHeight / winHeight;
-
-        Geo2DPosition currentLeft = upperLeft.clone();
-
-        Geo2DPosition currentRight = currentLeft.clone();
-        currentRight.setLon(currentRight.getLon() + areaWidth);
-
-        for (int y = 0; y < winHeight; y++) {
-            long start = posToGrid(currentLeft);
-            long end = posToGrid(currentRight);
-
-            try {
-                long step = Math.round(lonPerPixel * 60);
-                read = z.read(start + ":" + end + ":" + step);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InvalidRangeException e) {
-                e.printStackTrace();
+        if (heights != null) {
+            for (int y = 0; y < winWidth; y++) {
+                for (int x = 0; x < winHeight; x++) {
+                    graphics.setColor(getColor(heights[x * y]));
+                    graphics.fillRect(x, y, 1, 1);
+                }
             }
+        } else {
+            //heights = new double[winWidth * winHeight];
 
-            for (int x = 0; x < read.getSize(); x++) {
-                int depth = read.getInt(x);
+            double areaWidth = lowerRight.getLon() - upperLeft.getLon();
+            double areaHeight = lowerRight.getLat() - upperLeft.getLat();
 
-                if (depth < 0) {
-                    Double blue = ((-1 * depth) / 11000.0) * 255;
-                    int c = blue.intValue();
+            double lonPerPixel = areaWidth / winWidth;
+            double latPerPixel = areaHeight / winHeight;
 
-                    Color color = new Color(0, 0, 255 - c);
-                    graphics.setColor(color);
-                } else {
-                    if (depth > 2000) {
-                        Double gray = ((depth - 2000) / 7000.0) * 255;
-                        int c = gray.intValue();
+            Geo2DPosition currentLeft = upperLeft.clone();
+            Geo2DPosition currentRight = currentLeft.clone();
+            currentRight.setLon(currentRight.getLon() + areaWidth);
 
-                        Color color = new Color(c, c, c);
-                        graphics.setColor(color);
-                    } else {
-                        Double green = (depth / 2000.0) * 180;
-                        int c = green.intValue();
+            for (int y = 0; y < winHeight; y++) {
+                long start = posToGrid(currentLeft);
+                long end = posToGrid(currentRight);
 
-                        Color color = new Color(0, 255 - c, 0);
-                        graphics.setColor(color);
-                    }
+                long step = Math.round(lonPerPixel * 60);
+
+                Array read = null;
+
+                try {
+                    read = z.read(start + ":" + end + ":" + step);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InvalidRangeException e) {
+                    e.printStackTrace();
                 }
 
-                graphics.fillRect(x, y, 1, 1);
+                for (int x = 0; x < read.getSize() && x < win.getWidth(); x++) {
+                    int depth = read.getInt(x);
+                    graphics.setColor(getColor(depth));
+                    graphics.fillRect(x, y, 1, 1);
+              //      heights[x * y] = depth;
+                }
+
+                double newLat = currentLeft.getLat() + latPerPixel;
+
+                currentLeft.setLat(newLat);
+                currentRight.setLat(newLat);
             }
-
-            double newLat = currentLeft.getLat() + latPerPixel;
-
-            currentLeft.setLat(newLat);
-            currentRight.setLat(newLat);
         }
     }
 }
