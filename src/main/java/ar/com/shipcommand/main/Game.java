@@ -32,7 +32,7 @@ public class Game implements Runnable {
      * Initialize main window and game loop
      */
     protected static void init(String args[]) {
-        mainWindow = new MainWindow(1360, 768, "Ship Command");
+        mainWindow = new MainWindow(1360, 700, "Ship Command");
 
         gameLoop = new GameLoop();
         initialize();
