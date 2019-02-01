@@ -51,7 +51,7 @@ public class Game implements Runnable {
         }
 
         gameLoop.add(map);
-        gameLoop.add(test);
+        //gameLoop.add(test);
 
         runPhysics();
     }
