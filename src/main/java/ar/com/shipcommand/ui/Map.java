@@ -1,6 +1,7 @@
 package ar.com.shipcommand.ui;
 
 import ar.com.shipcommand.gfx.IRenderable;
+import ar.com.shipcommand.gfx.ImageTool;
 import ar.com.shipcommand.input.MouseHandler;
 import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.MainWindow;
@@ -52,6 +53,13 @@ public class Map implements IRenderable {
     int resizeStartPosX;
     int resizeStartPosY;
 
+    // Right click has been pressed and the map will zoom back on release
+    boolean willZoomBack = false;
+
+    // Get the main window's size
+    int mapWidth;
+    int mapHeight;
+
 
     /**
      * Creates a new map
@@ -65,6 +73,13 @@ public class Map implements IRenderable {
 
         // Stack for storing the previous areas shown in map
         history = new Stack<>();
+
+        // Get the main window object
+        MainWindow win = Game.getMainWindow();
+
+        // Get the main window's size
+        mapWidth = win.getWidth();
+        mapHeight = mapWidth / 2;
 
         // Set the default area
         setDefaultArea();
@@ -140,8 +155,8 @@ public class Map implements IRenderable {
      * @return Geographical position of corresponding point in the screen
      */
     protected Geo2DPosition screenToPos(int x, int y) {
-        double lat = (y * latPerPixel) - 90;
-        double lon = (x * lonPerPixel) - 180;
+        double lat = (y * latPerPixel) + upperLeft.getLat();
+        double lon = (x * lonPerPixel) + upperLeft.getLon();
 
         return new Geo2DPosition(lat, lon);
     }
@@ -228,25 +243,22 @@ public class Map implements IRenderable {
      * @param graphics Graphics object for drawings
      */
     protected void drawMap(Graphics2D graphics) {
-        // Get the main window object
-        MainWindow win = Game.getMainWindow();
-
-        // Get the main window's size
-        int winWidth = win.getWidth();
-        int winHeight = win.getHeight();
-
         // If there's no image generated for the current zoom, generate a new one
         if (map == null) {
             // Create a new buffered image for the map
-            map = new BufferedImage(winWidth, winHeight, BufferedImage.TYPE_INT_ARGB);
+            map = ImageTool.createHardwareAccelerated(mapWidth, mapHeight, false);
 
             // Calculate the area width in degrees given the upper left and lower right corners
             areaWidth = lowerRight.getLon() - upperLeft.getLon();
             areaHeight = lowerRight.getLat() - upperLeft.getLat();
 
             // Calculate the number of degrees of lat and lon per pixel
-            lonPerPixel = areaWidth / winWidth;
-            latPerPixel = areaHeight / winHeight;
+            lonPerPixel = areaWidth / mapWidth;
+            latPerPixel = areaHeight / mapHeight;
+
+            // Calculate the step size to sample as many heights as pixels in the screen row
+            long step = Math.round(Math.floor(lonPerPixel * 60));
+            if (step < 1) step = 1;
 
             // Place 2 pointers at the first line of latitude to draw.
             // One at the longitude of the left corner and the other at the end
@@ -255,13 +267,10 @@ public class Map implements IRenderable {
             currentRight.setLon(currentRight.getLon() + areaWidth);
 
             // Iterate each pixel in the image
-            for (int y = 0; y < winHeight; y++) {
+            for (int y = 0; y < mapHeight; y++) {
                 // Transform the geographical position of the pointers to an index on the heightmap grid
                 long start = posToGrid(currentLeft);
                 long end = posToGrid(currentRight);
-
-                // Calculate the step size to sample as many heights as pixels in the screen row
-                long step = Math.round(Math.floor(lonPerPixel * 60));
 
                 // Array of heights obtained from the heightmap
                 Array read = null;
@@ -276,9 +285,14 @@ public class Map implements IRenderable {
                 }
 
                 // Iterate over all heights drawing them on the image
-                for (int x = 0; x < read.getSize() && x < map.getWidth(); x++) {
+                for (int x = 0; x < map.getWidth(); x++) {
+                    double w = map.getWidth();
+                    double r = (x / w);
+                    int s = (int) read.getSize() - 1;
+                    int gx = (int) Math.round(r * s);
+
                     // Get the depth of the current point
-                    int depth = read.getInt(x);
+                    int depth = read.getInt(gx);
                     // Calculate the color of the pixel given the depth
                     Color color = getColor(depth);
 
@@ -303,9 +317,19 @@ public class Map implements IRenderable {
      * @param graphics Graphics object for drawing
      */
     protected void drawResizeRectangle(Graphics2D graphics) {
+        int mouseX = MouseHandler.getX();
+
+        if (mouseX < 0) mouseX = 0;
+        if (mouseX > mapWidth) mouseX = mapWidth;
+
         if (resizing) {
-            int w = MouseHandler.getX() - resizeStartPosX;
-            int h = MouseHandler.getY() - resizeStartPosY;
+            int w = mouseX - resizeStartPosX;
+            int h = w / 2;
+
+            if ((resizeStartPosY + h) > mapHeight) {
+                h = mapHeight - resizeStartPosY;
+                w = h * 2;
+            }
 
             if (w > 0 && h > 0) {
                 graphics.setColor(Color.yellow);
@@ -315,16 +339,58 @@ public class Map implements IRenderable {
             if (!MouseHandler.isPressed(1)) {
                 resizing = false;
 
-                Geo2DPosition ul = screenToPos(resizeStartPosX, resizeStartPosY);
-                Geo2DPosition lr = screenToPos(MouseHandler.getX(), MouseHandler.getY());
+                if (resizeStartPosX < mouseX) {
+                    Geo2DPosition ul = screenToPos(resizeStartPosX, resizeStartPosY);
+                    Geo2DPosition lr = screenToPos(mouseX, resizeStartPosY + h);
 
-                pushArea(ul, lr);
+                    pushArea(ul, lr);
+                }
             }
         } else {
             if (MouseHandler.isPressed(1)) {
                 resizing = true;
-                resizeStartPosX = MouseHandler.getX();
+                resizeStartPosX = mouseX;
                 resizeStartPosY = MouseHandler.getY();
+            }
+        }
+    }
+
+    private BufferedImage toCompatibleImage(BufferedImage image)
+    {
+        // obtain the current system graphical settings
+        GraphicsConfiguration gfxConfig = GraphicsEnvironment.
+                getLocalGraphicsEnvironment().getDefaultScreenDevice().
+                getDefaultConfiguration();
+
+        /*
+         * if image is already compatible and optimized for current system
+         * settings, simply return it
+         */
+        if (image.getColorModel().equals(gfxConfig.getColorModel()))
+            return image;
+
+        // image is not optimized, so create a new image that is
+        BufferedImage newImage = gfxConfig.createCompatibleImage(
+                image.getWidth(), image.getHeight(), image.getTransparency());
+
+        // get the graphics context of the new image to draw the old image on
+        Graphics2D g2d = newImage.createGraphics();
+
+        // actually draw the image and dispose of context no longer needed
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+
+        // return the new optimized image
+        return newImage;
+    }
+
+    protected void checkZoomBack() {
+        if (MouseHandler.isPressed(3)) {
+            willZoomBack = true;
+        } else {
+            if (willZoomBack) {
+                popArea();
+                willZoomBack = false;
             }
         }
     }
@@ -338,5 +404,6 @@ public class Map implements IRenderable {
     public void render(Graphics2D graphics, double dt) {
         drawMap(graphics);
         drawResizeRectangle(graphics);
+        checkZoomBack();
     }
 }

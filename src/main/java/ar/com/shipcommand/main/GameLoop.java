@@ -83,15 +83,15 @@ public class GameLoop {
 
         // If a buffer strategy is not found create one
         if (bs == null) {
-            win.createBufferStrategy(3);
+            win.createBufferStrategy(2);
             return;
         }
 
         // Get the graphics system
         Graphics2D graphics = (Graphics2D) bs.getDrawGraphics();
 
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0, 0, win.getWidth(), win.getHeight());
+        //graphics.setColor(Color.BLACK);
+        //graphics.fillRect(0, 0, win.getWidth(), win.getHeight());
 
         // Render all objects
         for (IRenderable object : renderables) {
