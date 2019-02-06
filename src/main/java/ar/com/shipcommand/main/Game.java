@@ -1,6 +1,7 @@
 package ar.com.shipcommand.main;
 
 import ar.com.shipcommand.ui.Map;
+import ar.com.shipcommand.ui.Tactical;
 
 import java.io.IOException;
 
@@ -43,9 +44,9 @@ public class Game implements Runnable {
      */
     private static void initialize() {
         Test test = new Test();
-        Map map = null;
+        Tactical map = null;
         try {
-            map = new Map();
+            map = new Tactical();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -49,7 +49,7 @@ public class Geo2DPosition {
      * @param lat Decimal Latitude
      */
     public void setLat(double lat) {
-        this.lat = lat;
+        setPosition(lat, lon);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Geo2DPosition {
      * @param lon Decimal Longitude
      */
     public void setLon(double lon) {
-        this.lon = lon;
+        setPosition(lat, lon);
     }
 
     /**
@@ -67,7 +67,7 @@ public class Geo2DPosition {
      * @param lat Latitude in radians
      */
     public void setLatRadians(double lat) {
-        this.lat = Math.toDegrees(lat);
+        setPostionRadians(lat, Math.toRadians(lon));
     }
 
     /**
@@ -76,7 +76,7 @@ public class Geo2DPosition {
      * @param lon Longitude in radians
      */
     public void setLonRadians(double lon) {
-        this.lon = Math.toDegrees(lon);
+        setPostionRadians(Math.toRadians(lat), lon);
     }
 
     /**
@@ -86,8 +86,17 @@ public class Geo2DPosition {
      * @param lon Decimal longitude
      */
     public void setPosition(double lat, double lon) {
-        this.lat = lat;
-        this.lon = lon;
+        double newLon = (lon) % 360;
+        if (newLon > 180)
+            newLon -= 360;
+        if (newLon < -180)
+            newLon += 360;
+
+        double newLat = (lat + 90) % 180;
+        newLat = newLat - 90;
+
+        this.lat = newLat;
+        this.lon = newLon;
     }
 
     /**
@@ -97,8 +106,7 @@ public class Geo2DPosition {
      * @param lon Longitude in radians
      */
     public void setPostionRadians(double lat, double lon) {
-        this.lat = Math.toDegrees(lat);
-        this.lon = Math.toDegrees(lon);
+        setPosition(Math.toDegrees(lat), Math.toDegrees(lon));
     }
 
     /**
@@ -145,6 +153,14 @@ public class Geo2DPosition {
      * @param course Course in degrees from north
      */
     public void move(Distance distance, double course) {
-        Geo2DPosition newPosition = GeoTools.movePosition(this, course, distance);
+        GeoTools.movePosition(this, course, distance);
+    }
+
+    public void moveLon(double degrees) {
+        setLon(getLon() + degrees);
+    }
+
+    public void moveLat(double degrees) {
+        setLat(getLat() + degrees);
     }
 }

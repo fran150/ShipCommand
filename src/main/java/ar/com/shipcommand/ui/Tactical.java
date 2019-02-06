@@ -2,27 +2,30 @@ package ar.com.shipcommand.ui;
 
 import ar.com.shipcommand.gfx.IRenderable;
 import ar.com.shipcommand.gfx.ImageTool;
-import ar.com.shipcommand.input.MouseHandler;
+import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.MainWindow;
 import ar.com.shipcommand.physics.geo.Geo2DPosition;
+import ar.com.shipcommand.physics.geo.HeightMap;
+import ar.com.shipcommand.physics.geo.Heights;
+import ar.com.shipcommand.physics.magnitudes.Distance;
+import ar.com.shipcommand.physics.magnitudes.DistanceUnits;
 import ucar.ma2.Array;
-import ucar.ma2.InvalidRangeException;
-import ucar.nc2.NetcdfFile;
-import ucar.nc2.Variable;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Stack;
 
-public class Map implements IRenderable {
-    // Heightmap file
-    NetcdfFile file;
-    // Z variable of the NetCDF file
-    Variable z;
+public class Tactical implements IRenderable {
     // Generated image of the world
     BufferedImage map = null;
+
+    // Center of the area currently shown
+    private Geo2DPosition center;
+    // Distance of the side of the area currently shown
+    private Distance areaSize;
 
     // Upper left position of the area currently shown
     private Geo2DPosition upperLeft;
@@ -37,42 +40,22 @@ public class Map implements IRenderable {
     double lonPerPixel;
     double latPerPixel;
 
-    // Previous shown areas
-    private Stack<Geo2DPosition> history;
-
-    // Width and height of the heightmap grid
-    private static long GRID_WIDTH = 21601;
-    private static long GRID_HEIGHT = 10801;
-
     // Min and max altitudes found on the heightmap file
     private static long EARTH_MIN_HEIGHT = -11000;
     private static long EARTH_MAX_HEIGHT = 8500;
-
-    // Indicates if the map is being resized
-    boolean resizing = false;
-    int resizeStartPosX;
-    int resizeStartPosY;
-
-    // Right click has been pressed and the map will zoom back on release
-    boolean willZoomBack = false;
 
     // Get the main window's size
     int mapWidth;
     int mapHeight;
 
+    HeightMap heightMap;
 
     /**
      * Creates a new map
      *
      * @throws IOException Thrown if the heightmap NetCDF file is not found
      */
-    public Map() throws IOException {
-        // Read the NetCDF file and get the Z variable
-        file = NetcdfFile.open("./src/main/resources/GRIDONE_1D.nc");
-        z = file.findVariable("z");
-
-        // Stack for storing the previous areas shown in map
-        history = new Stack<>();
+    public Tactical() throws IOException {
 
         // Get the main window object
         MainWindow win = Game.getMainWindow();
@@ -81,70 +64,27 @@ public class Map implements IRenderable {
         mapWidth = win.getWidth();
         mapHeight = mapWidth / 2;
 
-        // Set the default area
-        setDefaultArea();
+        heightMap =  new HeightMap();
+
+        setArea(new Geo2DPosition(0, 0), new Distance(4000, DistanceUnits.NauticalMiles));
     }
 
-    /**
-     * Sets the default area to show on the map
-     */
-    protected void setDefaultArea() {
-        // Show the entire world
-        upperLeft = new Geo2DPosition(90, -180);
-        lowerRight = new Geo2DPosition(-90, 180);
+    public void setArea(Geo2DPosition center, Distance areaSize) {
+        this.center = center;
+        this.areaSize = areaSize;
+        calculateCorners();
     }
 
-    /**
-     * Returns if the map is showing the default area
-     *
-     * @return True if the map is showing the entire world
-     */
-    protected boolean isDefaultArea() {
-        return upperLeft.getLat() != 90 || upperLeft.getLon() != -180 || lowerRight.getLat() != -90 && lowerRight.getLon() != 180;
-    }
+    protected void calculateCorners() {
+        double halfSquared = Math.pow(areaSize.inMeters() / 2, 2);
 
-    /**
-     * Sets a new area to show on map
-     *
-     * @param upperLeft Upper left position of the area to show
-     * @param lowerRight Lower right position of the area to show
-     */
-    public void pushArea(Geo2DPosition upperLeft, Geo2DPosition lowerRight) {
-        history.push(this.upperLeft);
-        history.push(this.lowerRight);
+        Distance diagonalSize = new Distance(Math.sqrt(2 * halfSquared));
 
-        this.upperLeft = upperLeft;
-        this.lowerRight = lowerRight;
+        upperLeft = center.clone();
+        lowerRight = center.clone();
 
-        map = null;
-    }
-
-    /**
-     * Retrieve a new area from the zoom history to show
-     *
-     * If its the last area show the entire world
-     */
-    public void popArea() {
-        if (!history.isEmpty()) {
-            lowerRight = history.pop();
-            upperLeft = history.pop();
-            map = null;
-        } else {
-            if (!isDefaultArea()) {
-                setDefaultArea();
-                map = null;
-            }
-        }
-    }
-
-    /**
-     * Converts to the given geographical position to the corresponding grid index
-     *
-     * @param position Position to convert
-     * @return index in the heightmap file
-     */
-    protected long posToGrid(Geo2DPosition position) {
-        return Math.round((Math.round((90 - position.getLat()) * 60) * GRID_WIDTH) + ((position.getLon() + 180) * 60));
+        upperLeft.move(diagonalSize, 315);
+        lowerRight.move(diagonalSize, 135);
     }
 
     /**
@@ -249,8 +189,8 @@ public class Map implements IRenderable {
             map = ImageTool.createHardwareAccelerated(mapWidth, mapHeight, false);
 
             // Calculate the area width in degrees given the upper left and lower right corners
-            areaWidth = lowerRight.getLon() - upperLeft.getLon();
-            areaHeight = upperLeft.getLat() - lowerRight.getLat();
+            areaWidth = Math.abs(lowerRight.getLon() - upperLeft.getLon());
+            areaHeight = Math.abs(upperLeft.getLat() - lowerRight.getLat());
 
             // Calculate the number of degrees of lat and lon per pixel
             lonPerPixel = areaWidth / mapWidth;
@@ -264,25 +204,11 @@ public class Map implements IRenderable {
             // One at the longitude of the left corner and the other at the end
             Geo2DPosition currentLeft = upperLeft.clone();
             Geo2DPosition currentRight = currentLeft.clone();
-            currentRight.setLon(currentRight.getLon() + areaWidth);
+            currentRight.moveLon(areaWidth);
 
             // Iterate each pixel in the image
             for (int y = 0; y < mapHeight; y++) {
-                // Transform the geographical position of the pointers to an index on the heightmap grid
-                long start = posToGrid(currentLeft);
-                long end = posToGrid(currentRight);
-
-                // Array of heights obtained from the heightmap
-                Array read = null;
-
-                try {
-                    // Read the row of heights for this line of pixels
-                    read = z.read(start + ":" + end + ":" + step);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InvalidRangeException e) {
-                    e.printStackTrace();
-                }
+                Heights read = heightMap.getHeights(currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), step);
 
                 // Iterate over all heights drawing them on the image
                 for (int x = 0; x < map.getWidth(); x++) {
@@ -292,7 +218,7 @@ public class Map implements IRenderable {
                     int gx = (int) Math.round(r * s);
 
                     // Get the depth of the current point
-                    int depth = read.getInt(gx);
+                    int depth = read.getHeight(gx);
                     // Calculate the color of the pixel given the depth
                     Color color = getColor(depth);
 
@@ -301,69 +227,13 @@ public class Map implements IRenderable {
                 }
 
                 // Calculate the new latitude moving as many degrees needed for the next pixel
-                double newLat = currentLeft.getLat() - latPerPixel;
-                currentLeft.setLat(newLat);
-                currentRight.setLat(newLat);
+                currentLeft.moveLat(-1 * latPerPixel);
+                currentRight.moveLat(-1 * latPerPixel);
             }
         }
 
         // Draw the current map image
         graphics.drawImage(map, null, null);
-    }
-
-    /**
-     * Draw a rectangle when resizing
-     *
-     * @param graphics Graphics object for drawing
-     */
-    protected void drawResizeRectangle(Graphics2D graphics) {
-        int mouseX = MouseHandler.getX();
-
-        if (mouseX < 0) mouseX = 0;
-        if (mouseX > mapWidth) mouseX = mapWidth;
-
-        if (resizing) {
-            int w = mouseX - resizeStartPosX;
-            int h = w / 2;
-
-            if ((resizeStartPosY + h) > mapHeight) {
-                h = mapHeight - resizeStartPosY;
-                w = h * 2;
-            }
-
-            if (w > 0 && h > 0) {
-                graphics.setColor(Color.yellow);
-                graphics.drawRect(resizeStartPosX, resizeStartPosY, w, h);
-            }
-
-            if (!MouseHandler.isPressed(1)) {
-                resizing = false;
-
-                if (resizeStartPosX < mouseX) {
-                    Geo2DPosition ul = screenToPos(resizeStartPosX, resizeStartPosY);
-                    Geo2DPosition lr = screenToPos(mouseX, resizeStartPosY + h);
-
-                    pushArea(ul, lr);
-                }
-            }
-        } else {
-            if (MouseHandler.isPressed(1)) {
-                resizing = true;
-                resizeStartPosX = mouseX;
-                resizeStartPosY = MouseHandler.getY();
-            }
-        }
-    }
-
-    protected void checkZoomBack() {
-        if (MouseHandler.isPressed(3)) {
-            willZoomBack = true;
-        } else {
-            if (willZoomBack) {
-                popArea();
-                willZoomBack = false;
-            }
-        }
     }
 
     /**
@@ -373,8 +243,33 @@ public class Map implements IRenderable {
      * @param dt Time elapsed from previous time step
      */
     public void render(Graphics2D graphics, double dt) {
+        Distance d = new Distance(500, DistanceUnits.NauticalMiles);
+
+        if (KeyHandler.isDown(KeyEvent.VK_D)) {
+            center.move(d, 90);
+            calculateCorners();
+            map = null;
+        }
+
+        if (KeyHandler.isDown(KeyEvent.VK_W)) {
+            center.move(d, 0);
+            calculateCorners();
+            map = null;
+        }
+
+        if (KeyHandler.isDown(KeyEvent.VK_A)) {
+            center.move(d, 270);
+            calculateCorners();
+            map = null;
+        }
+
+        if (KeyHandler.isDown(KeyEvent.VK_S)) {
+            center.move(d, 180);
+            calculateCorners();
+            map = null;
+        }
+
+
         drawMap(graphics);
-        drawResizeRectangle(graphics);
-        checkZoomBack();
     }
 }
