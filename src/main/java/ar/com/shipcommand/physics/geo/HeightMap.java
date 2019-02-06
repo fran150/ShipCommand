@@ -66,16 +66,16 @@ public class HeightMap {
             Array read1 = null;
             Array read2 = null;
 
-            long start1 = end;
-            long end1 = posToGrid(new Geo2DPosition(posRight.getLat(), 180));
-            long start2 = posToGrid(new Geo2DPosition(posLeft.getLat(), -180));
-            long end2 = start;
+            long start1 = start;
+            long end1 = posToGrid(new Geo2DPosition(posLeft.getLat(), 180));
+            long start2 = posToGrid(new Geo2DPosition(posRight.getLat(), -180));
+            long end2 = end;
 
 
             try {
                 // Read the row of heights for this line of pixels
                 read1 = z.read(start1 + ":" + end1 + ":" + step);
-                read1 = z.read(start2 + ":" + end2 + ":" + step);
+                read2 = z.read(start2 + ":" + end2 + ":" + step);
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InvalidRangeException e) {
@@ -83,6 +83,17 @@ public class HeightMap {
             }
 
             return new Heights(read1, read2);
+        }
+    }
+
+    public double getAreaWidth(Geo2DPosition left, Geo2DPosition right) {
+        double l = left.getLon();
+        double r = right.getLon();
+
+        if (l < r) {
+            return r - l;
+        } else {
+            return (180 - l) + (180 + r);
         }
     }
 }

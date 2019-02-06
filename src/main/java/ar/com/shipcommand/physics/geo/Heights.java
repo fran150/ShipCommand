@@ -25,10 +25,10 @@ public class Heights {
 
     public int getHeight(int index) {
         if (h1 != null) {
-            if (index > h1.getSize()) {
-                return h.getInt((int) (index - h1.getSize()));
+            if (index > h.getSize() - 1) {
+                return h1.getInt((int) (index - h.getSize()));
             } else {
-                return h1.getInt(index);
+                return h.getInt(index);
             }
         } else {
             return h.getInt(index);

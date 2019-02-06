@@ -189,7 +189,7 @@ public class Tactical implements IRenderable {
             map = ImageTool.createHardwareAccelerated(mapWidth, mapHeight, false);
 
             // Calculate the area width in degrees given the upper left and lower right corners
-            areaWidth = Math.abs(lowerRight.getLon() - upperLeft.getLon());
+            areaWidth = heightMap.getAreaWidth(upperLeft, lowerRight);
             areaHeight = Math.abs(upperLeft.getLat() - lowerRight.getLat());
 
             // Calculate the number of degrees of lat and lon per pixel
