@@ -90,7 +90,7 @@ public abstract class SimObject implements IGameObject {
         // Get the distance traveled on the time step
         Distance traveled = new Distance(horizontalSpeed.inMetersPerSecond() * dt);
         // Move the current position the specified distance on the present course
-        position.move(traveled, course);
+        position.move(course, traveled);
 
         // Get the current altitude in meters
         Distance altitude = position.getAltitude();

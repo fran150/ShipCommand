@@ -10,6 +10,47 @@ import ar.com.shipcommand.physics.geo.exceptions.InfiniteSolutionsException;
  * https://www.movable-type.co.uk/scripts/latlong.html
  */
 public class GeoTools {
+
+    /**
+     * Returns the degrees of difference in longitude of the given points
+     *
+     * @param left point to the left
+     * @param right point to the right
+     *
+     * @return Longitude difference between the two points
+     */
+    public static double getLongitudeDifference(Geo2DPosition left, Geo2DPosition right) {
+        double l = left.getLon();
+        double r = right.getLon();
+
+        if (l < r) {
+            return r - l;
+        } else {
+            return (180 - l) + (180 + r);
+        }
+    }
+
+    /**
+     * Returns the degrees of difference in latitude of the given points
+     *
+     * @param upper upper point
+     * @param lower lower point
+     *
+     * @return Latitude difference between the two points
+     */
+    public static double getLatitudeDifference(Geo2DPosition upper, Geo2DPosition lower) {
+        double uLat = upper.getLat();
+        double uLon = upper.getLon();
+        double lLat = lower.getLat();
+        double lLon = lower.getLon();
+
+        if (Math.abs(uLon - lLon) < 179.8) {
+            return Math.abs(uLat - lLat);
+        } else {
+            return Math.abs(uLat + lLat);
+        }
+    }
+
     /**
      * Get distance between two points
      *
@@ -30,7 +71,7 @@ public class GeoTools {
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return new Distance(GeoConsts.EARTH_RADIUS * c);
+        return new Distance(GeoConstants.EARTH_RADIUS * c);
     }
 
     /**
@@ -49,7 +90,7 @@ public class GeoTools {
         double y = Math.sin(λ2 - λ1) * Math.cos(φ2);
         double x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
 
-        return Math.toDegrees(Math.atan2(y, x));
+        return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
     }
 
     /**
@@ -65,7 +106,7 @@ public class GeoTools {
         double λ = start.getLonRadians();
 
         double θ = Math.toRadians(bearing);
-        double δ = distance.inMeters() / GeoConsts.EARTH_RADIUS;
+        double δ = distance.inMeters() / GeoConstants.EARTH_RADIUS;
 
 
         double φ2 = Math.asin(Math.sin(φ)*Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));

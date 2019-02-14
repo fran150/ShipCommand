@@ -49,7 +49,13 @@ public class Geo2DPosition {
      * @param lat Decimal Latitude
      */
     public void setLat(double lat) {
-        setPosition(lat, lon);
+        double l = Math.abs(lat % 360);
+        if (l > 90 && l <= 180) l = 180 - l;
+        if (l > 180 && l <= 270) l = lat - 180;
+        if (l > 270 && l <= 360) l = 360 - lat;
+
+        if (lat > 0) this.lat = l;
+        if (lat < 0) this.lat = -l;
     }
 
     /**
@@ -58,7 +64,10 @@ public class Geo2DPosition {
      * @param lon Decimal Longitude
      */
     public void setLon(double lon) {
-        setPosition(lat, lon);
+        double l = lon % 360;
+        if (l > 180) l -= 360;
+        if (l < -180) l += 360;
+        this.lon = l;
     }
 
     /**
@@ -67,7 +76,7 @@ public class Geo2DPosition {
      * @param lat Latitude in radians
      */
     public void setLatRadians(double lat) {
-        setPostionRadians(lat, Math.toRadians(lon));
+        setLat(Math.toDegrees(lat));
     }
 
     /**
@@ -76,7 +85,7 @@ public class Geo2DPosition {
      * @param lon Longitude in radians
      */
     public void setLonRadians(double lon) {
-        setPostionRadians(Math.toRadians(lat), lon);
+        setLon(Math.toDegrees(lon));
     }
 
     /**
@@ -86,17 +95,8 @@ public class Geo2DPosition {
      * @param lon Decimal longitude
      */
     public void setPosition(double lat, double lon) {
-        double newLon = (lon) % 360;
-        if (newLon > 180)
-            newLon -= 360;
-        if (newLon < -180)
-            newLon += 360;
-
-        double newLat = (lat + 90) % 180;
-        newLat = newLat - 90;
-
-        this.lat = newLat;
-        this.lon = newLon;
+        setLat(lat);
+        setLon(lon);
     }
 
     /**
@@ -106,7 +106,8 @@ public class Geo2DPosition {
      * @param lon Longitude in radians
      */
     public void setPostionRadians(double lat, double lon) {
-        setPosition(Math.toDegrees(lat), Math.toDegrees(lon));
+        setLatRadians(lat);
+        setLonRadians(lon);
     }
 
     /**
@@ -149,18 +150,10 @@ public class Geo2DPosition {
     /**
      * Move the current position
      *
-     * @param distance Distance to move
      * @param course Course in degrees from north
+     * @param distance Distance to move
      */
-    public void move(Distance distance, double course) {
+    public void move(double course, Distance distance) {
         GeoTools.movePosition(this, course, distance);
-    }
-
-    public void moveLon(double degrees) {
-        setLon(getLon() + degrees);
-    }
-
-    public void moveLat(double degrees) {
-        setLat(getLat() + degrees);
     }
 }
