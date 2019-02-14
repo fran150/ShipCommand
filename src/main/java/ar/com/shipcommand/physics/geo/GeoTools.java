@@ -108,14 +108,41 @@ public class GeoTools {
         double θ = Math.toRadians(bearing);
         double δ = distance.inMeters() / GeoConstants.EARTH_RADIUS;
 
-
-        double φ2 = Math.asin(Math.sin(φ)*Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));
+        double φ2 = Math.asin(Math.sin(φ) * Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));
         double λ2 = λ + Math.atan2(Math.sin(θ) * Math.sin(δ) * Math.cos(φ), Math.cos(δ) - Math.sin(φ) * Math.sin(φ2));
 
         start.setPostionRadians(φ2, λ2);
 
         return start;
     }
+
+    public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DPosition end, Distance distance) {
+        double φ1 = start.getLatRadians();
+        double λ1 = start.getLonRadians();
+        double φ2 = end.getLatRadians();
+        double λ2 = end.getLonRadians();
+
+        double cosφ1 = Math.cos(φ1);
+        double sinφ1 = Math.sin(φ1);
+        double cosφ2 = Math.cos(φ2);
+
+        double y = Math.sin(λ2 - λ1) * cosφ2;
+        double x = cosφ1 * Math.sin(φ2) - sinφ1 * cosφ2 * Math.cos(λ2 - λ1);
+
+        double θ = Math.atan2(y, x);
+        double δ = distance.inMeters() / GeoConstants.EARTH_RADIUS;
+
+        double cosδ = Math.cos(δ);
+        double sinδ = Math.sin(δ);
+
+        double φ3 = Math.asin(sinφ1 * cosδ + cosφ1 * sinδ * Math.cos(θ));
+        double λ3 = λ1 + Math.atan2(Math.sin(θ) * sinδ * cosφ1, cosδ - sinφ1 * Math.sin(φ3));
+
+        start.setPostionRadians(φ3, λ3);
+
+        return start;
+    }
+
 
     /**
      * Returns the intersection position of two paths given its initial positions and bearings

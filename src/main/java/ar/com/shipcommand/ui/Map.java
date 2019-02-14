@@ -58,6 +58,7 @@ public class Map implements IRenderable {
      * Creates a new map
      *
      * @throws IOException Thrown if the heightmap NetCDF file is not found
+     * @throws InvalidRangeException Error when the specified position is invalid
      */
     public Map() throws IOException, InvalidRangeException {
         heightMap = new HeightMap();
@@ -161,10 +162,6 @@ public class Map implements IRenderable {
             lonPerPixel = areaWidth / mapWidth;
             latPerPixel = areaHeight / mapHeight;
 
-            // Calculate the step size to sample as many heights as pixels in the screen row
-            long step = Math.round(Math.floor(lonPerPixel * 60));
-            if (step < 1) step = 1;
-
             // Place 2 pointers at the first line of latitude to draw.
             // One at the longitude of the left corner and the other at the end
             Geo2DPosition currentLeft = upperLeft.clone();
@@ -174,7 +171,7 @@ public class Map implements IRenderable {
             // Iterate each pixel in the image
             for (int y = 0; y < mapHeight; y++) {
                 Heights heights = heightMap.getHeightsLine(
-                        currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), step);
+                        currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), lonPerPixel);
 
                 // Iterate over all heights drawing them on the image
                 for (int x = 0; x < mapWidth; x++) {

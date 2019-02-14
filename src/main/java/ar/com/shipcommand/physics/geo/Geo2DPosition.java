@@ -156,4 +156,15 @@ public class Geo2DPosition {
     public void move(double course, Distance distance) {
         GeoTools.movePosition(this, course, distance);
     }
+
+    /**
+     * Move the current position towards a specific point
+     *
+     * @param end Point where the position must be move
+     * @param distance Distance to move
+     */
+    public void moveTowards(Geo2DPosition end, Distance distance) {
+        GeoTools.moveTowards(this, end, distance);
+    }
+
 }

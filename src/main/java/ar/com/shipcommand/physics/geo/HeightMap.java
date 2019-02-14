@@ -5,11 +5,6 @@ import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
-import static sun.java2d.cmm.ColorTransform.In;
 
 /**
  * Contains information of the world's heights and depths
@@ -24,18 +19,14 @@ public class HeightMap {
     private static long GRID_WIDTH = 21601;
     private static long GRID_HEIGHT = 10801;
 
-    Array data;
-
     /**
      * Creates a new height map object that allows to read the height of a given position
      *
      * @throws IOException Produced when the system can't read the heights file
      */
     public HeightMap() throws IOException, InvalidRangeException {
-        file = NetcdfFile.open("./src/main/resources/GRIDONE_1D.nc");
+        file = NetcdfFile.openInMemory("./src/main/resources/GRIDONE_1D.nc");
         z = file.findVariable("z");
-        z.setCaching(true);
-        data = z.read("0:" + ((GRID_WIDTH * GRID_HEIGHT) - 1));
     }
 
     /**
@@ -48,15 +39,41 @@ public class HeightMap {
         return Math.round((Math.round((90 - position.getLat()) * 60) * GRID_WIDTH) + ((position.getLon() + 180) * 60));
     }
 
-    public int getHeight(Geo2DPosition position) {
+    /**
+     * Returns the height at the given position
+     *
+     * @param position Position from where to get the height
+     * @return Height at the given position
+     * @throws IOException Error when reading the elevations file
+     * @throws InvalidRangeException Error when an invalid position is entered
+     */
+    public int getHeight(Geo2DPosition position)
+            throws IOException, InvalidRangeException {
         long index = posToGrid(position);
-        return data.getInt((int) index);
+        Array data = z.read(index + "");
+        return data.getInt(0);
     }
 
-    public Heights getHeightsLine(double lat, double left, double right, long step)
+    /**
+     * Returns an array of heights in the same latitude
+     *
+     * @param lat Latitude of heights
+     * @param left Leftmost longitude to read
+     * @param right Rightmost longitude to read
+     * @param step Returns the data separated by this longitude in degrees
+     * @return Heights of the specified section
+     * @throws IOException Error when reading the elevations file
+     * @throws InvalidRangeException Error when the specified position is invalid
+     */
+    public Heights getHeightsLine(double lat, double left, double right, double step)
             throws IOException, InvalidRangeException {
         Geo2DPosition posLeft = new Geo2DPosition(lat, left);
         Geo2DPosition posRight = new Geo2DPosition(lat, right);
+
+        // Calculate the step size to sample as many heights as pixels in the screen row
+        long stepSize = Math.round(Math.floor(step * 60));
+        if (stepSize < 1) stepSize = 1;
+
 
         // If the geographical position is inside bounds
         if (posLeft.getLon() < posRight.getLon()) {
@@ -65,7 +82,7 @@ public class HeightMap {
             long end = posToGrid(posRight);
 
             // Read the row of heights for this line of pixels
-            Array heights = z.read(start + ":" + end + ":" + step);
+            Array heights = z.read(start + ":" + end + ":" + stepSize);
 
             return new Heights(heights);
         } else {

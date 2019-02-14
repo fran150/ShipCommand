@@ -6,9 +6,7 @@ import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.MainWindow;
 import ar.com.shipcommand.physics.geo.Geo2DPosition;
-import ar.com.shipcommand.physics.geo.GeoTools;
 import ar.com.shipcommand.physics.geo.HeightMap;
-import ar.com.shipcommand.physics.geo.Heights;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 import ar.com.shipcommand.physics.magnitudes.DistanceUnits;
 import ucar.ma2.InvalidRangeException;
@@ -62,7 +60,7 @@ public class Tactical implements IRenderable {
 
         heightMap = new HeightMap();
 
-        setArea(new Geo2DPosition(-89.99, 0), new Distance(3000, DistanceUnits.NauticalMiles));
+        setArea(new Geo2DPosition(-89.99, 0), new Distance(2000, DistanceUnits.NauticalMiles));
     }
 
     public void setArea(Geo2DPosition center, Distance areaSize) {
@@ -105,31 +103,29 @@ public class Tactical implements IRenderable {
             // One at the longitude of the left corner and the other at the end
             Geo2DPosition currentLeft = upperLeft.clone();
             Geo2DPosition currentRight = upperRight.clone();
+            Geo2DPosition current = new Geo2DPosition();
 
             // Iterate each pixel in the image
             for (int y = 0; y < mapHeight; y++) {
-                Geo2DPosition current = currentLeft.clone();
+                current.copy(currentLeft);
 
                 // Iterate over all heights drawing them on the image
                 for (int x = 0; x < mapWidth; x++) {
                     // Get the depth of the current point
-                    int depth = 100;//heightMap.getHeight(current);
+                    int depth = heightMap.getHeight(current); //(int) Math.round(current.getLat() * 100);
+
                     // Calculate the color of the pixel given the depth
                     Color color = MapTools.getColor(depth);
 
                     // Draw the pixel on the image
                     map.setRGB(x, y, color.getRGB());
 
-                    double bearing = GeoTools.getBearing(current, currentRight);
-                    current.move(bearing, hDistancePerPixel);
+                    current.moveTowards(currentRight, hDistancePerPixel);
                 }
 
-                double leftBearing = GeoTools.getBearing(currentLeft, lowerLeft);
-                double rightBearing = GeoTools.getBearing(currentRight, lowerRight);
-
                 // Calculate the new latitude moving as many degrees needed for the next pixel
-                currentLeft.move(leftBearing, vDistancePerPixel);
-                currentRight.move(rightBearing, vDistancePerPixel);
+                currentLeft.moveTowards(lowerLeft, vDistancePerPixel);
+                currentRight.moveTowards(lowerRight, vDistancePerPixel);
             }
         }
 

@@ -45,9 +45,9 @@ public class Game implements Runnable {
      */
     private static void initialize() {
         Test test = new Test();
-        Tactical map = null;
+        Map map = null;
         try {
-            map = new Tactical();
+            map = new Map();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InvalidRangeException e) {
