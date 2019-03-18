@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="175ec548-fbda-4ef2-bc02-dcd6a5be4b5e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/HeightMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/HeightMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -23,32 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="49" column="25" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+            <state relative-caret-position="410">
+              <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,6 +58,7 @@
       <find>.move</find>
       <find>System.ou</find>
       <find>θ</find>
+      <find>dimg</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -146,7 +123,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/GameLoop.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoConsts.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Heights.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoConstants.java" />
@@ -155,9 +131,10 @@
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/HeightMap.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java" />
       </list>
     </option>
   </component>
@@ -187,7 +164,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -202,6 +179,12 @@
               <item name="ShipCommand" type="58d84e3e:PackageViewProjectNode" />
               <item name="ShipCommand" type="616d4139:PackageViewModuleNode" />
               <item name="ar.com.shipcommand" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ShipCommand" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ShipCommand" type="616d4139:PackageViewModuleNode" />
+              <item name="ar.com.shipcommand" type="1f31426a:PackageElementNode" />
+              <item name="gfx" type="1f31426a:PackageElementNode" />
             </path>
             <path>
               <item name="ShipCommand" type="58d84e3e:PackageViewProjectNode" />
@@ -227,6 +210,11 @@
               <item name="ShipCommand" type="616d4139:PackageViewModuleNode" />
               <item name="ar.com.shipcommand" type="1f31426a:PackageElementNode" />
               <item name="ui" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="ShipCommand" type="58d84e3e:PackageViewProjectNode" />
+              <item name="ShipCommand" type="616d4139:PackageViewModuleNode" />
+              <item name="Libraries" type="5c3f07af:PackageViewLibrariesNode" />
             </path>
           </expand>
           <select />
@@ -498,13 +486,14 @@
     <todo-panel id="all">
       <are-packages-shown value="true" />
       <is-autoscroll-to-source value="true" />
+      <is-preview-enabled value="true" />
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4942717" visible="true" weight="0.21028744" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4942717" visible="true" weight="0.21633889" />
       <window_info id="Structure" order="1" sideWeight="0.5057283" side_tool="true" weight="0.24281392" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -515,13 +504,13 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49546143" visible="true" weight="0.33060557" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49546143" weight="0.33060557" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3289689" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5045386" side_tool="true" weight="0.4304419" />
-      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49621785" weight="0.5204583" />
+      <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49621785" weight="0.25040916" />
       <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49924356" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -872,16 +861,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="15" column="47" lean-forward="true" selection-start-line="15" selection-start-column="47" selection-end-line="15" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/IRenderable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -934,33 +913,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="170" lean-forward="true" selection-start-line="170" selection-end-line="170" />
-          <folding>
-            <element signature="e#828#829#0" expanded="true" />
-            <element signature="e#870#871#0" expanded="true" />
-            <element signature="e#3431#3432#0" expanded="true" />
-            <element signature="e#3492#3493#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoConstants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="142" column="21" selection-start-line="142" selection-start-column="21" selection-end-line="142" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -981,16 +937,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1000,8 +946,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/main/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="49" column="25" selection-start-line="49" selection-start-column="25" selection-end-line="49" selection-end-column="25" />
+        <state relative-caret-position="208">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/ui/Tactical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="135" column="34" selection-start-line="135" selection-start-column="34" selection-end-line="135" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/Geo2DPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+          <folding>
+            <element signature="e#828#829#0" expanded="true" />
+            <element signature="e#870#871#0" expanded="true" />
+            <element signature="e#3431#3432#0" expanded="true" />
+            <element signature="e#3492#3493#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/physics/geo/GeoTools.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="144" selection-start-line="144" selection-end-line="144" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/com/shipcommand/gfx/ImageTool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="50" column="8" selection-start-line="50" selection-start-column="8" selection-end-line="50" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -55,8 +55,8 @@ public class Tactical implements IRenderable {
         MainWindow win = Game.getMainWindow();
 
         // Get the main window's size
-        mapWidth = win.getWidth();
-        mapHeight = mapWidth / 2;
+        mapWidth = 640;
+        mapHeight = 320;
 
         heightMap = new HeightMap();
 
@@ -127,10 +127,17 @@ public class Tactical implements IRenderable {
                 currentLeft.moveTowards(lowerLeft, vDistancePerPixel);
                 currentRight.moveTowards(lowerRight, vDistancePerPixel);
             }
+
         }
+
+        // Get the main window object
+        MainWindow win = Game.getMainWindow();
+
+        map = ImageTool.resize(map, win.getWidth(), win.getHeight());
 
         // Draw the current map image
         graphics.drawImage(map, null, null);
+
     }
 
     /**
