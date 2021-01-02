@@ -62,6 +62,10 @@ public class Map implements IRenderable {
      */
     public Map() throws IOException, InvalidRangeException {
         heightMap = new HeightMap();
+        
+	// Read the NetCDF file and get the Z variable
+        file = NetcdfFile.open("./src/main/resources/GRIDONE_2D.nc");
+        z = file.findVariable("elevation");
 
         // Stack for storing the previous areas shown in map
         history = new Stack<>();
@@ -130,6 +134,23 @@ public class Map implements IRenderable {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * Converts to the given geographical position to the corresponding grid index
+     *
+     * @param position Position to convert
+     * @return index in the heightmap file
+     */
+    protected long posToLat(Geo2DPosition position) {
+        return Math.round((position.getLat() + 90) * 60);
+    }
+
+    protected long posToLon(Geo2DPosition position) {
+        return Math.round((position.getLon() + 180) * 60);
+    }
+
+    /**
+>>>>>>> maven
      * Converts the given screen position to geographical position on the map
      *
      * @param x X position on the screen
@@ -170,8 +191,29 @@ public class Map implements IRenderable {
 
             // Iterate each pixel in the image
             for (int y = 0; y < mapHeight; y++) {
+<<<<<<< HEAD
                 Heights heights = heightMap.getHeightsLine(
                         currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), lonPerPixel);
+=======
+                // Transform the geographical position of the pointers to an index on the heightmap grid
+                long start = posToLon(currentLeft);
+                long end = posToLon(currentRight);
+                long latitude = posToLat(currentLeft);
+
+                // Array of heights obtained from the heightmap
+                Array read = null;
+
+                try {
+                    String latSection = latitude +":" + latitude;
+                    String lonSection = start + ":" + end + ":" + step;
+                    // Read the row of heights for this line of pixels
+                    read = z.read( latSection + "," + lonSection);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InvalidRangeException e) {
+                    e.printStackTrace();
+                }
+>>>>>>> maven
 
                 // Iterate over all heights drawing them on the image
                 for (int x = 0; x < mapWidth; x++) {
