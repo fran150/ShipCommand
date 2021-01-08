@@ -1,25 +1,23 @@
 package ar.com.shipcommand.ui;
 
-import ar.com.shipcommand.gfx.IRenderable;
+import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.gfx.ImageTool;
 import ar.com.shipcommand.input.MouseHandler;
 import ar.com.shipcommand.main.Game;
-import ar.com.shipcommand.main.MainWindow;
+import ar.com.shipcommand.main.windows.MainWindow;
+import ar.com.shipcommand.main.windows.WindowManager;
 import ar.com.shipcommand.physics.geo.Geo2DPosition;
 import ar.com.shipcommand.physics.geo.GeoTools;
 import ar.com.shipcommand.physics.geo.HeightMap;
 import ar.com.shipcommand.physics.geo.Heights;
-import ucar.ma2.Array;
 import ucar.ma2.InvalidRangeException;
-import ucar.nc2.NetcdfFile;
-import ucar.nc2.Variable;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Stack;
 
-public class Map implements IRenderable {
+public class Map implements Renderable {
     // Height map file reader
     HeightMap heightMap;
     // Generated image of the world
@@ -62,16 +60,12 @@ public class Map implements IRenderable {
      */
     public Map() throws IOException, InvalidRangeException {
         heightMap = new HeightMap();
-        
-	// Read the NetCDF file and get the Z variable
-        file = NetcdfFile.open("./src/main/resources/GRIDONE_2D.nc");
-        z = file.findVariable("elevation");
 
         // Stack for storing the previous areas shown in map
         history = new Stack<>();
 
         // Get the main window object
-        MainWindow win = Game.getMainWindow();
+        MainWindow win = WindowManager.getMainWindow();
 
         // Set the map size
         mapWidth = win.getWidth();
@@ -134,23 +128,6 @@ public class Map implements IRenderable {
     }
 
     /**
-<<<<<<< HEAD
-=======
-     * Converts to the given geographical position to the corresponding grid index
-     *
-     * @param position Position to convert
-     * @return index in the heightmap file
-     */
-    protected long posToLat(Geo2DPosition position) {
-        return Math.round((position.getLat() + 90) * 60);
-    }
-
-    protected long posToLon(Geo2DPosition position) {
-        return Math.round((position.getLon() + 180) * 60);
-    }
-
-    /**
->>>>>>> maven
      * Converts the given screen position to geographical position on the map
      *
      * @param x X position on the screen
@@ -191,29 +168,8 @@ public class Map implements IRenderable {
 
             // Iterate each pixel in the image
             for (int y = 0; y < mapHeight; y++) {
-<<<<<<< HEAD
-                Heights heights = heightMap.getHeightsLine(
-                        currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), lonPerPixel);
-=======
-                // Transform the geographical position of the pointers to an index on the heightmap grid
-                long start = posToLon(currentLeft);
-                long end = posToLon(currentRight);
-                long latitude = posToLat(currentLeft);
-
-                // Array of heights obtained from the heightmap
-                Array read = null;
-
-                try {
-                    String latSection = latitude +":" + latitude;
-                    String lonSection = start + ":" + end + ":" + step;
-                    // Read the row of heights for this line of pixels
-                    read = z.read( latSection + "," + lonSection);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InvalidRangeException e) {
-                    e.printStackTrace();
-                }
->>>>>>> maven
+                Heights heights = heightMap
+                        .getHeightsLine(currentLeft.getLat(), currentLeft.getLon(), currentRight.getLon(), lonPerPixel);
 
                 // Iterate over all heights drawing them on the image
                 for (int x = 0; x < mapWidth; x++) {
@@ -247,7 +203,7 @@ public class Map implements IRenderable {
      * @param graphics Graphics object for drawing
      */
     protected void drawResizeRectangle(Graphics2D graphics) {
-        int mouseX = MouseHandler.getX();
+        int mouseX = MouseHandler.getCurrentX();
 
         if (mouseX < 0) mouseX = 0;
         if (mouseX > mapWidth) mouseX = mapWidth;
@@ -266,7 +222,7 @@ public class Map implements IRenderable {
                 graphics.drawRect(resizeStartPosX, resizeStartPosY, w, h);
             }
 
-            if (!MouseHandler.isPressed(1)) {
+            if (!MouseHandler.isButtonPressed(1)) {
                 resizing = false;
 
                 if (resizeStartPosX < mouseX) {
@@ -277,16 +233,16 @@ public class Map implements IRenderable {
                 }
             }
         } else {
-            if (MouseHandler.isPressed(1)) {
+            if (MouseHandler.isButtonPressed(1)) {
                 resizing = true;
                 resizeStartPosX = mouseX;
-                resizeStartPosY = MouseHandler.getY();
+                resizeStartPosY = MouseHandler.getCurrentY();
             }
         }
     }
 
     protected void checkZoomBack() {
-        if (MouseHandler.isPressed(3)) {
+        if (MouseHandler.isButtonPressed(3)) {
             willZoomBack = true;
         } else {
             if (willZoomBack) {

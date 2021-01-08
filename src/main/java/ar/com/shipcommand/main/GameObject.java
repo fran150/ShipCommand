@@ -3,7 +3,7 @@ package ar.com.shipcommand.main;
 /**
  * Interface for objects whose state must be updated in each of the game's time steps
  */
-public interface IGameObject {
+public interface GameObject {
     /**
      * Method called when needed to update the object's state for this time step
      *

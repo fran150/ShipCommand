@@ -11,24 +11,24 @@ public class KeyHandler extends KeyAdapter {
     /**
      * Set of currently pressed keys
      */
-    private static HashSet<Integer> pressed = new HashSet<>();
+    private static final HashSet<Integer> pressed = new HashSet<>();
 
     /**
      * Called when a key is pressed over the window
      *
-     * @param e Key event
+     * @param event Key event
      */
-    public void keyPressed(KeyEvent e) {
-        pressed.add(e.getKeyCode());
+    public void keyPressed(KeyEvent event) {
+        pressed.add(event.getKeyCode());
     }
 
     /**
      * Called when a key is released
      *
-     * @param e Key event
+     * @param event Key event
      */
-    public void keyReleased(KeyEvent e) {
-        pressed.remove(e.getKeyCode());
+    public void keyReleased(KeyEvent event) {
+        pressed.remove(event.getKeyCode());
     }
 
     /**

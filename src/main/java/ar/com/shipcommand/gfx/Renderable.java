@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Interface for objects that can be rendered on the screen
  */
-public interface IRenderable {
+public interface Renderable {
     /**
      * Method called when needed to update the object's render state
      *

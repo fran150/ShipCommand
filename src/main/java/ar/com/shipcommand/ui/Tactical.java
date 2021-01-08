@@ -1,10 +1,11 @@
 package ar.com.shipcommand.ui;
 
-import ar.com.shipcommand.gfx.IRenderable;
+import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.gfx.ImageTool;
 import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.main.Game;
-import ar.com.shipcommand.main.MainWindow;
+import ar.com.shipcommand.main.windows.MainWindow;
+import ar.com.shipcommand.main.windows.WindowManager;
 import ar.com.shipcommand.physics.geo.Geo2DPosition;
 import ar.com.shipcommand.physics.geo.HeightMap;
 import ar.com.shipcommand.physics.magnitudes.Distance;
@@ -16,7 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Tactical implements IRenderable {
+public class Tactical implements Renderable {
     // Height map file reader
     HeightMap heightMap;
 
@@ -52,21 +53,25 @@ public class Tactical implements IRenderable {
      */
     public Tactical() throws IOException, InvalidRangeException {
         // Get the main window object
-        MainWindow win = Game.getMainWindow();
+        MainWindow win = WindowManager.getMainWindow();
 
         // Get the main window's size
-        mapWidth = 640;
-        mapHeight = 320;
+        mapWidth = WindowManager.getMainWindow().getWidth() / 3;
+        mapHeight = WindowManager.getMainWindow().getHeight() / 3;
 
         heightMap = new HeightMap();
 
-        setArea(new Geo2DPosition(-89.99, 0), new Distance(2000, DistanceUnits.NauticalMiles));
+        setArea(new Geo2DPosition(0, 0), new Distance(1000, DistanceUnits.NauticalMiles));
     }
 
     public void setArea(Geo2DPosition center, Distance areaSize) {
         this.center = center;
         this.areaSize = areaSize;
         calculateCorners();
+    }
+
+    public Distance getAreaSize() {
+        return areaSize;
     }
 
     protected void calculateCorners() {
@@ -131,13 +136,12 @@ public class Tactical implements IRenderable {
         }
 
         // Get the main window object
-        MainWindow win = Game.getMainWindow();
+        MainWindow win = WindowManager.getMainWindow();
 
         map = ImageTool.resize(map, win.getWidth(), win.getHeight());
 
         // Draw the current map image
         graphics.drawImage(map, null, null);
-
     }
 
     /**
@@ -147,7 +151,7 @@ public class Tactical implements IRenderable {
      * @param dt Time elapsed from previous time step
      */
     public void render(Graphics2D graphics, double dt) {
-        Distance d = new Distance(500, DistanceUnits.NauticalMiles);
+        Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.NauticalMiles);
 
         if (KeyHandler.isDown(KeyEvent.VK_D)) {
             center.move(90, d);
@@ -171,6 +175,22 @@ public class Tactical implements IRenderable {
             center.move(180, d);
             calculateCorners();
             map = null;
+        }
+
+        if (KeyHandler.isDown(KeyEvent.VK_EQUALS)) {
+            getAreaSize().setNauticalMiles(getAreaSize().inNauticalMiles() - 50);
+            calculateCorners();
+            map = null;
+        }
+
+        if (KeyHandler.isDown(KeyEvent.VK_MINUS)) {
+            getAreaSize().setNauticalMiles(getAreaSize().inNauticalMiles() + 50);
+            calculateCorners();
+            map = null;
+        }
+
+        if (getAreaSize().inNauticalMiles() < 50) {
+            getAreaSize().setNauticalMiles(50);
         }
 
         try {

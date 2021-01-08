@@ -7,17 +7,19 @@ import java.awt.image.BufferedImage;
  * Image tools
  */
 public class ImageTool {
+    private static final int UPPER = 0;
+    private static final int LEFT = 0;
+
     /**
      * Graphics default configuration
      */
-    private static GraphicsConfiguration config =
+    private static final GraphicsConfiguration config =
             GraphicsEnvironment.getLocalGraphicsEnvironment()
                     .getDefaultScreenDevice()
                     .getDefaultConfiguration();
 
     /**
      * Creates a new hardware accelerated image
-     *
      * @param width Image width in pixels
      * @param height Image height in pixels
      * @param alpha Alpha enabled
@@ -31,26 +33,27 @@ public class ImageTool {
 
     /**
      * Resize the specified buffered image
-     *
-     * @param img Image to resize
-     * @param newW New width
-     * @param newH New height
+     * @param image Image to resize
+     * @param newWidth New width
+     * @param newHeight New height
      * @return Resized image
      */
-    public static BufferedImage resize(BufferedImage img, int newW, int newH) {
-        int w = img.getWidth();
-        int h = img.getHeight();
+    public static BufferedImage resize(BufferedImage image, int newWidth, int newHeight) {
+        int currentWidth = image.getWidth();
+        int currentHeight = image.getHeight();
 
-        BufferedImage newImg = new BufferedImage(newW, newH, img.getType());
+        BufferedImage newImage = new BufferedImage(newWidth, newHeight, image.getType());
 
-        Graphics2D g = newImg.createGraphics();
-
-        g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
+        Graphics2D graphics = newImage.createGraphics();
+        graphics.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
                 RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g.drawImage(img, 0, 0, newW, newH, 0, 0, w, h, null);
 
-        g.dispose();
-        return newImg;
+        graphics.drawImage(image,
+                UPPER, LEFT, newWidth, newHeight,
+                UPPER, LEFT, currentWidth, currentHeight, null);
+
+        graphics.dispose();
+
+        return newImage;
     }
-
 }

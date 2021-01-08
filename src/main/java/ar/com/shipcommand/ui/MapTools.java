@@ -67,6 +67,9 @@ public class MapTools {
                 r = 205; g = 133; b = 63;
                 // More height more dark
                 factor = ((depth - 1300) / GeoConstants.EARTH_MAX_HEIGHT);
+
+                factor = factor > 1 ? 1 : factor;
+                factor = factor < 0 ? 0 : factor;
                 return shade(r, g, b, factor);
             } else if (depth > 500 && depth <= 1300) {
                 // Between 500 and 1300 meters paint yellow
