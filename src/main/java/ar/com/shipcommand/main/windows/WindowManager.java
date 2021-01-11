@@ -1,6 +1,6 @@
 package ar.com.shipcommand.main.windows;
 
-import ar.com.shipcommand.config.StaticConfiguration;
+import ar.com.shipcommand.common.config.StaticConfiguration;
 
 /**
  * Manages all the game's windows

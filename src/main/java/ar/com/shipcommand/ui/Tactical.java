@@ -3,11 +3,10 @@ package ar.com.shipcommand.ui;
 import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.gfx.ImageTool;
 import ar.com.shipcommand.input.KeyHandler;
-import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
-import ar.com.shipcommand.physics.geo.Geo2DPosition;
-import ar.com.shipcommand.physics.geo.HeightMap;
+import ar.com.shipcommand.geo.Geo2DPosition;
+import ar.com.shipcommand.geo.HeightMap;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 import ar.com.shipcommand.physics.magnitudes.DistanceUnits;
 import ucar.ma2.InvalidRangeException;
@@ -79,10 +78,10 @@ public class Tactical implements Renderable {
 
         Distance diagonalSize = new Distance(Math.sqrt(2 * halfSquared));
 
-        upperLeft = center.clone();
-        upperRight = center.clone();
-        lowerLeft = center.clone();
-        lowerRight = center.clone();
+        upperLeft = new Geo2DPosition(center);
+        upperRight = new Geo2DPosition(center);
+        lowerLeft = new Geo2DPosition(center);
+        lowerRight = new Geo2DPosition(center);
 
         upperLeft.move(315, diagonalSize);
         upperRight.move(45, diagonalSize);
@@ -106,8 +105,8 @@ public class Tactical implements Renderable {
 
             // Place 2 pointers at the first line of latitude to draw.
             // One at the longitude of the left corner and the other at the end
-            Geo2DPosition currentLeft = upperLeft.clone();
-            Geo2DPosition currentRight = upperRight.clone();
+            Geo2DPosition currentLeft = new Geo2DPosition(upperLeft);
+            Geo2DPosition currentRight = new Geo2DPosition(upperRight);
             Geo2DPosition current = new Geo2DPosition();
 
             // Iterate each pixel in the image

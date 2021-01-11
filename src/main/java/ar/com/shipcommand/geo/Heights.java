@@ -1,4 +1,4 @@
-package ar.com.shipcommand.physics.geo;
+package ar.com.shipcommand.geo;
 
 import ucar.ma2.Array;
 
@@ -6,25 +6,28 @@ import ucar.ma2.Array;
  * Heights list retrieved from heightmap file
  */
 public class Heights {
-    // Primary array of heights
-    private Array primary;
-    // Secondary array of heights
-    private Array secondary = null;
+    /**
+     * Primary array of heights
+     */
+    private final Array primary;
+    /**
+     * Secondary array of heights
+     */
+    private final Array secondary;
 
     /**
      * Creates a new array of heights
-     *
      * @param primary Primary list of data
      */
     Heights(Array primary) {
         this.primary = primary;
+        this.secondary = null;
     }
 
     /**
      * Creates a new array of heights. (Used when two segments of heights are needed)
      * If two segments of data are specified the primary data segment is returned first o the
      * getHeight function and then the secondary
-     *
      * @param primary Primary data segment
      * @param secondary Secondary data segment
      */
@@ -35,7 +38,6 @@ public class Heights {
 
     /**
      * Returns the number of heights in the heightmap
-     *
      * @return Number of items in the heightmap
      */
     public long getSize() {
@@ -44,9 +46,7 @@ public class Heights {
 
     /**
      * Return the height at the given index
-     *
      * @param index Index of the height to obtain
-     *
      * @return Height in meters
      */
     public int getHeight(int index) {

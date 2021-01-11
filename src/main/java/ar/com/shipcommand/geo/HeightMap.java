@@ -1,5 +1,6 @@
-package ar.com.shipcommand.physics.geo;
+package ar.com.shipcommand.geo;
 
+import ar.com.shipcommand.common.config.StaticConfiguration;
 import ucar.ma2.*;
 import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
@@ -10,26 +11,32 @@ import java.io.IOException;
  * Contains information of the world's heights and depths
  */
 public class HeightMap {
-    // Heightmap file
-    private NetcdfFile file;
-    // Elevation variable of the NetCDF file
-    private Variable elevation;
+    /**
+     * Elevations variable read from the file
+     */
+    private final Variable elevation;
 
-    // Width and height of the heightmap grid
+    /**
+     * Width of the grid in the heightmap file
+     */
     private final long gridWidth;
+    /**
+     * Height of the grid in the heightmap file
+     */
     private final long gridHeight;
 
     /**
      * Creates a new height map object that allows to read the height of a given position
-     *
      * @throws IOException Produced when the system can't read the heights file
      */
-    public HeightMap() throws IOException, InvalidRangeException {
-        file = NetcdfFile.openInMemory("./src/main/resources/GRIDONE_2D.nc");
-        elevation = file.findVariable("elevation");
+    public HeightMap() throws IOException {
+        NetcdfFile file = NetcdfFile.openInMemory(StaticConfiguration.HEIGHT_MAP_FILE);
+        elevation = file.findVariable(StaticConfiguration.HEIGHT_MAP_VARIABLE_NAME);
 
-        gridWidth = file.findDimension("lon").getLength();
-        gridHeight = file.findDimension("lat").getLength();
+        gridWidth = file.findDimension(StaticConfiguration.HEIGHT_MAP_LONGITUDE_DIMENSION_NAME)
+                .getLength();
+        gridHeight = file.findDimension(StaticConfiguration.HEIGHT_MAP_LATITUDE_DIMENSION_NAME)
+                .getLength();
     }
 
     /**
@@ -37,7 +44,7 @@ public class HeightMap {
      * @param position Position to convert
      * @return latitude dimension on the grid
      */
-    protected long posToGridLat(Geo2DPosition position) {
+    private long posToGridLat(Geo2DPosition position) {
         long lat = (gridHeight - Math.round((90 - position.getLat()) * (gridHeight / 180.0)));
         return Math.min(gridHeight - 1, lat);
     }
@@ -47,14 +54,13 @@ public class HeightMap {
      * @param position Position to convert
      * @return longitude dimension on the grid
      */
-    protected long posToGridLon(Geo2DPosition position) {
+    private long posToGridLon(Geo2DPosition position) {
         long lon = Math.round((position.getLon() + 180) * (gridWidth / 360.0));
         return Math.min(gridWidth - 1, lon);
     }
 
     /**
      * Returns the height at the given position
-     *
      * @param position Position from where to get the height
      * @return Height at the given position
      * @throws IOException Error when reading the elevations file
@@ -71,17 +77,34 @@ public class HeightMap {
         return data.getInt(0);
     }
 
-    private String getSection(long lat, long lonStart, long lonEnd) {
+    /**
+     * Returns a section specification used to read from the file a line of height
+     * on the given latitude an between the specified longitudes
+     * @param lat Latitude to read from the file
+     * @param lonStart Longitude from where to start reading
+     * @param lonEnd Longitude where end reading
+     * @return Section specification to be used to read from the file
+     */
+    private String getSectionSpecification(long lat, long lonStart, long lonEnd) {
         return lat + "," + lonStart + ":" + lonEnd;
     }
 
-    private String getSection(long lat, long lonStart, long lonEnd, long stepSize) {
-        return getSection(lat, lonStart, lonEnd) + ":" + stepSize;
+    /**
+     * Returns a section specification used to read from the file a line of height
+     * on the given latitude an between the specified longitudes and stepping in the
+     * specified interval
+     * @param lat Latitude to read from the file
+     * @param lonStart Longitude from where to start reading
+     * @param lonEnd Longitude where end reading
+     * @param stepSize Number of data points to skip between each value
+     * @return Section specification to be used to read from the file
+     */
+    private String getSectionSpecification(long lat, long lonStart, long lonEnd, long stepSize) {
+        return getSectionSpecification(lat, lonStart, lonEnd) + ":" + stepSize;
     }
 
     /**
      * Returns an array of heights in the same latitude
-     *
      * @param lat Latitude of heights
      * @param left Leftmost longitude to read
      * @param right Rightmost longitude to read
@@ -108,7 +131,7 @@ public class HeightMap {
             long gridLat = posToGridLat(posLeft);
 
             // Read the row of heights for this line of pixels
-            Array heights = elevation.read(getSection(gridLat, start, end, stepSize));
+            Array heights = elevation.read(getSectionSpecification(gridLat, start, end, stepSize));
 
             return new Heights(heights);
         } else {
@@ -124,8 +147,8 @@ public class HeightMap {
             long gridLatitude = posToGridLat(posLeft);
 
             // Read the row of heights for this line of pixels
-            Array heights1 = elevation.read(getSection(gridLatitude, start1, end1, stepSize));
-            Array heights2 = elevation.read(getSection(gridLatitude, start2, end2, stepSize));
+            Array heights1 = elevation.read(getSectionSpecification(gridLatitude, start1, end1, stepSize));
+            Array heights2 = elevation.read(getSectionSpecification(gridLatitude, start2, end2, stepSize));
 
             return new Heights(heights1, heights2);
         }

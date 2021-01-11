@@ -1,7 +1,7 @@
 package ar.com.shipcommand.main.loops;
 
 import ar.com.shipcommand.common.CommonConstants;
-import ar.com.shipcommand.config.StaticConfiguration;
+import ar.com.shipcommand.common.config.StaticConfiguration;
 import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.windows.MainWindow;

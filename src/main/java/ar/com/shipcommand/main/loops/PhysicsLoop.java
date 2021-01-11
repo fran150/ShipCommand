@@ -1,8 +1,7 @@
 package ar.com.shipcommand.main.loops;
 
 import ar.com.shipcommand.common.CommonConstants;
-import ar.com.shipcommand.config.StaticConfiguration;
-import ar.com.shipcommand.input.MouseHandler;
+import ar.com.shipcommand.common.config.StaticConfiguration;
 import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.GameObject;
 import ar.com.shipcommand.utils.TimeUtils;
@@ -108,8 +107,6 @@ public class PhysicsLoop implements Runnable {
                     numberOfCalculatedFrames++;
                 }
             }
-
-            MouseHandler.update();
 
             if (TimeUtils.aSecondHasPassedFrom(fpsTimer)) {
                 fpsTimer += CommonConstants.MILLISECONDS_IN_ONE_SECOND;

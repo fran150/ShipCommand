@@ -1,15 +1,9 @@
 package ar.com.shipcommand.main;
 
-import ar.com.shipcommand.gfx.Renderable;
+import ar.com.shipcommand.input.MouseHandler;
 import ar.com.shipcommand.main.loops.GameLoopsManager;
-import ar.com.shipcommand.main.loops.PhysicsLoop;
-import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
-import ar.com.shipcommand.ui.Tactical;
 import ar.com.shipcommand.ui.UIManager;
-import ucar.ma2.InvalidRangeException;
-
-import java.io.IOException;
 
 /**
  * Main game class
@@ -72,6 +66,10 @@ public class Game {
     public static synchronized void start() {
         running = true;
         GameLoopsManager.start();
+
+        while (running) {
+            MouseHandler.update();
+        }
     }
 
     /**

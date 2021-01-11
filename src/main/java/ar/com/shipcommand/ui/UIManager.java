@@ -13,7 +13,7 @@ public class UIManager {
 
     @SneakyThrows
     public static void initialize() {
-        mainMap = new Tactical();
+        mainMap = new Map();
         GameLoopsManager.getGraphicsLoop().add(mainMap);
     }
 }

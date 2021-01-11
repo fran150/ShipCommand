@@ -3,13 +3,12 @@ package ar.com.shipcommand.ui;
 import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.gfx.ImageTool;
 import ar.com.shipcommand.input.MouseHandler;
-import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
-import ar.com.shipcommand.physics.geo.Geo2DPosition;
-import ar.com.shipcommand.physics.geo.GeoTools;
-import ar.com.shipcommand.physics.geo.HeightMap;
-import ar.com.shipcommand.physics.geo.Heights;
+import ar.com.shipcommand.geo.Geo2DPosition;
+import ar.com.shipcommand.geo.GeoTools;
+import ar.com.shipcommand.geo.HeightMap;
+import ar.com.shipcommand.geo.Heights;
 import ucar.ma2.InvalidRangeException;
 
 import java.awt.*;
@@ -162,8 +161,8 @@ public class Map implements Renderable {
 
             // Place 2 pointers at the first line of latitude to draw.
             // One at the longitude of the left corner and the other at the end
-            Geo2DPosition currentLeft = upperLeft.clone();
-            Geo2DPosition currentRight = currentLeft.clone();
+            Geo2DPosition currentLeft = new Geo2DPosition(upperLeft);
+            Geo2DPosition currentRight = new Geo2DPosition(currentLeft);
             currentRight.setLon(currentRight.getLon() + areaWidth);
 
             // Iterate each pixel in the image

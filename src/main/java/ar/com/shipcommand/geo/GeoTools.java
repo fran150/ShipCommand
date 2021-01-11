@@ -1,59 +1,53 @@
-package ar.com.shipcommand.physics.geo;
+package ar.com.shipcommand.geo;
 
+import ar.com.shipcommand.common.CommonConstants;
+import ar.com.shipcommand.geo.exceptions.AmbiguousSolutionException;
+import ar.com.shipcommand.geo.exceptions.InfiniteSolutionsException;
 import ar.com.shipcommand.physics.magnitudes.Distance;
-import ar.com.shipcommand.physics.geo.exceptions.AmbiguousSolutionException;
-import ar.com.shipcommand.physics.geo.exceptions.InfiniteSolutionsException;
 
 /**
  * Collection of tools to calculate geographical data
- *
  * https://www.movable-type.co.uk/scripts/latlong.html
  */
 public class GeoTools {
-
     /**
      * Returns the degrees of difference in longitude of the given points
-     *
      * @param left point to the left
      * @param right point to the right
-     *
      * @return Longitude difference between the two points
      */
     public static double getLongitudeDifference(Geo2DPosition left, Geo2DPosition right) {
-        double l = left.getLon();
-        double r = right.getLon();
+        double leftLon = left.getLon();
+        double rightLon = right.getLon();
 
-        if (l < r) {
-            return r - l;
+        if (leftLon < rightLon) {
+            return rightLon - leftLon;
         } else {
-            return (180 - l) + (180 + r);
+            return (180 - leftLon) + (180 + rightLon);
         }
     }
 
     /**
      * Returns the degrees of difference in latitude of the given points
-     *
      * @param upper upper point
      * @param lower lower point
-     *
      * @return Latitude difference between the two points
      */
     public static double getLatitudeDifference(Geo2DPosition upper, Geo2DPosition lower) {
-        double uLat = upper.getLat();
-        double uLon = upper.getLon();
-        double lLat = lower.getLat();
-        double lLon = lower.getLon();
+        double upperLat = upper.getLat();
+        double upperLon = upper.getLon();
+        double lowerLat = lower.getLat();
+        double lowerLon = lower.getLon();
 
-        if (Math.abs(uLon - lLon) < 179.8) {
-            return Math.abs(uLat - lLat);
+        if (Math.abs(upperLon - lowerLon) < 180.0) {
+            return Math.abs(upperLat - lowerLat);
         } else {
-            return Math.abs(uLat + lLat);
+            return Math.abs(upperLat + lowerLat);
         }
     }
 
     /**
      * Get distance between two points
-     *
      * @param start Start position
      * @param end End position
      * @return Distance in meters between the given points
@@ -65,18 +59,16 @@ public class GeoTools {
         double Δφ = Math.toRadians(end.getLat() - start.getLat());
         double Δλ = Math.toRadians(end.getLon() - start.getLon());
 
-
         double a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
                    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return new Distance(GeoConstants.EARTH_RADIUS * c);
+        return new Distance(CommonConstants.EARTH_RADIUS * c);
     }
 
     /**
      * Get the initial bearing between two points
-     *
      * @param start Start position
      * @param end End position
      * @return Bearing in degrees to from the start point to the end
@@ -95,7 +87,6 @@ public class GeoTools {
 
     /**
      * Returns a new position calculated given a start position, a bearing and a distance
-     *
      * @param start Start position
      * @param bearing Bearing in degrees
      * @param distance Distance in meters
@@ -106,16 +97,24 @@ public class GeoTools {
         double λ = start.getLonRadians();
 
         double θ = Math.toRadians(bearing);
-        double δ = distance.inMeters() / GeoConstants.EARTH_RADIUS;
+        double δ = distance.inMeters() / CommonConstants.EARTH_RADIUS;
 
         double φ2 = Math.asin(Math.sin(φ) * Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));
         double λ2 = λ + Math.atan2(Math.sin(θ) * Math.sin(δ) * Math.cos(φ), Math.cos(δ) - Math.sin(φ) * Math.sin(φ2));
 
-        start.setPostionRadians(φ2, λ2);
+        start.setPositionRadians(φ2, λ2);
 
         return start;
     }
 
+    /**
+     * Returns a new position that is moved the specified distance in the direction of the
+     * end position
+     * @param start Starting position
+     * @param end Destination position
+     * @param distance Distance to move
+     * @return New position relative to the start
+     */
     public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DPosition end, Distance distance) {
         double φ1 = start.getLatRadians();
         double λ1 = start.getLonRadians();
@@ -130,7 +129,7 @@ public class GeoTools {
         double x = cosφ1 * Math.sin(φ2) - sinφ1 * cosφ2 * Math.cos(λ2 - λ1);
 
         double θ = Math.atan2(y, x);
-        double δ = distance.inMeters() / GeoConstants.EARTH_RADIUS;
+        double δ = distance.inMeters() / CommonConstants.EARTH_RADIUS;
 
         double cosδ = Math.cos(δ);
         double sinδ = Math.sin(δ);
@@ -138,7 +137,7 @@ public class GeoTools {
         double φ3 = Math.asin(sinφ1 * cosδ + cosφ1 * sinδ * Math.cos(θ));
         double λ3 = λ1 + Math.atan2(Math.sin(θ) * sinδ * cosφ1, cosδ - sinφ1 * Math.sin(φ3));
 
-        start.setPostionRadians(φ3, λ3);
+        start.setPositionRadians(φ3, λ3);
 
         return start;
     }
@@ -146,7 +145,6 @@ public class GeoTools {
 
     /**
      * Returns the intersection position of two paths given its initial positions and bearings
-     *
      * @param p1 Initial position of first path
      * @param bearing1 Bearing of first path
      * @param p2 Initial position of second path
@@ -224,7 +222,7 @@ public class GeoTools {
 
         // Create new position
         Geo2DPosition intersect = new Geo2DPosition();
-        intersect.setPostionRadians(φ3, λ3);
+        intersect.setPositionRadians(φ3, λ3);
 
         return intersect;
     }

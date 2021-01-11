@@ -3,7 +3,7 @@ package ar.com.shipcommand.world;
 import ar.com.shipcommand.main.GameObject;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 import ar.com.shipcommand.physics.magnitudes.Speed;
-import ar.com.shipcommand.physics.geo.Geo3DPosition;
+import ar.com.shipcommand.geo.Geo3DPosition;
 
 /**
  * Represents an object in the simulation world.

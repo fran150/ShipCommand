@@ -1,6 +1,6 @@
 package ar.com.shipcommand.ui;
 
-import ar.com.shipcommand.physics.geo.GeoConstants;
+import ar.com.shipcommand.common.CommonConstants;
 
 import java.awt.*;
 
@@ -59,14 +59,14 @@ public class MapTools {
             // Paint blue
             r = 0; g = 0; b = 255;
             // More deep more dark
-            factor = depth / GeoConstants.EARTH_MIN_HEIGHT;
+            factor = depth / CommonConstants.EARTH_MIN_HEIGHT;
             return shade(r, g, b, factor);
         } else {
             if (depth > 1300) {
                 // If depth is larger than 1300 meters paint brown
                 r = 205; g = 133; b = 63;
                 // More height more dark
-                factor = ((depth - 1300) / GeoConstants.EARTH_MAX_HEIGHT);
+                factor = ((depth - 1300) / CommonConstants.EARTH_MAX_HEIGHT);
 
                 factor = factor > 1 ? 1 : factor;
                 factor = factor < 0 ? 0 : factor;

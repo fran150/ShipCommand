@@ -1,6 +1,6 @@
 package ar.com.shipcommand.main.windows;
 
-import ar.com.shipcommand.config.StaticConfiguration;
+import ar.com.shipcommand.common.config.StaticConfiguration;
 import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.input.MouseHandler;
 import lombok.Builder;
