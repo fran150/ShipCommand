@@ -2,6 +2,9 @@ package ar.com.shipcommand.utils;
 
 import ar.com.shipcommand.common.CommonConstants;
 
+/**
+ * Time handling utilities
+ */
 public class TimeUtils {
     /**
      * Gets the elapsed time in seconds

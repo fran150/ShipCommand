@@ -15,7 +15,6 @@ public class KeyHandler extends KeyAdapter {
 
     /**
      * Called when a key is pressed over the window
-     *
      * @param event Key event
      */
     public void keyPressed(KeyEvent event) {
@@ -24,7 +23,6 @@ public class KeyHandler extends KeyAdapter {
 
     /**
      * Called when a key is released
-     *
      * @param event Key event
      */
     public void keyReleased(KeyEvent event) {
@@ -33,7 +31,6 @@ public class KeyHandler extends KeyAdapter {
 
     /**
      * Returns if the specified key is currently pressed
-     *
      * @param keyCode Key code
      * @return True if the specified key is pressed
      */

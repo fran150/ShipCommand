@@ -1,6 +1,5 @@
 package ar.com.shipcommand.main;
 
-import ar.com.shipcommand.input.MouseHandler;
 import ar.com.shipcommand.main.loops.GameLoopsManager;
 import ar.com.shipcommand.main.windows.WindowManager;
 import ar.com.shipcommand.ui.UIManager;
@@ -9,11 +8,11 @@ import ar.com.shipcommand.ui.UIManager;
  * Main game class
  */
 public class Game {
-    private static boolean running = false;
-    private static boolean physicsRunning = false;
+    // Indicates that the game is running
+    private static boolean running;
 
     /**
-     *
+     * Main entry point for the application
      * @param args command line arguments
      */
     public static void main(String[] args) {
@@ -30,34 +29,11 @@ public class Game {
     }
 
     /**
-     * Return if game is running
-     * @return True game is running
+     * Returns if the game is running
+     * @return true if the game is running
      */
     public static boolean isRunning() {
         return running;
-    }
-
-    /**
-     * Return if physics engine is running.
-     * When physics engine is stopped, only the render loop is processed
-     * @return True if the physics engine is running
-     */
-    public static boolean isPhysicsRunning() {
-        return physicsRunning;
-    }
-
-    /**
-     * Run the physics engine
-     */
-    public static void runPhysics() {
-        physicsRunning = true;
-    }
-
-    /**
-     * Stop the physics engine
-     */
-    public static void stopPhysics() {
-        physicsRunning = false;
     }
 
     /**
@@ -66,17 +42,13 @@ public class Game {
     public static synchronized void start() {
         running = true;
         GameLoopsManager.start();
-
-        while (running) {
-            MouseHandler.update();
-        }
     }
 
     /**
      * Stops the main game thread
      */
     public static synchronized void stop() {
-        GameLoopsManager.stop();
         running = false;
+        GameLoopsManager.stop();
     }
 }

@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Main game loop implementation
  */
-public class PhysicsLoop implements Runnable {
+public class PhysicsLoop extends GameLoop {
     /**
      * Time for each physics step
      */
@@ -24,14 +24,15 @@ public class PhysicsLoop implements Runnable {
     private final Set<GameObject> gameObjects;
 
     /**
-     * Physics frames per second
+     * Current physics time step size
      */
-    private int fps;
+    double physicsStep;
 
     /**
      * Creates a new physics loop
      */
     public PhysicsLoop() {
+        physicsStep = 0.0;
         gameObjects = new HashSet<>();
     }
 
@@ -54,14 +55,6 @@ public class PhysicsLoop implements Runnable {
     }
 
     /**
-     * Gets the physics frames per second
-     * @return Physics frames per second
-     */
-    public int getFps() {
-        return fps;
-    }
-
-    /**
      * Call timestep method on all game objects to make them update it's state
      */
     private void timestep() {
@@ -75,45 +68,19 @@ public class PhysicsLoop implements Runnable {
      * Update all the physics objects in the game
      */
     @Override
-    public void run() {
-        // Time step size
-        double dt;
-        // Current physics time step size
-        double physicsStep = 0;
-        // Store the current time to calculate the time step
-        long lastTime = System.nanoTime();
+    public boolean loop(double dt, long time) {
+        // Add the time to the current physics step
+        physicsStep += dt;
 
-        // Store the current time for the physics FPS calculation
-        long fpsTimer = System.currentTimeMillis();
-        // Number of calculated frames inside the current second
-        int numberOfCalculatedFrames = 0;
+        // If the current step is more than the target frame time, calculate the frame
+        if (physicsStep >= FRAME_TIME) {
+            // Remove used time from remaining physics time to maintain a fixed time step
+            physicsStep -= FRAME_TIME;
+            timestep();
 
-        while (Game.isRunning()) {
-            // Calculate elapsed time and reset last time
-            long now = System.nanoTime();
-            dt = TimeUtils.getElapsedTime(lastTime, now);
-            lastTime = now;
-
-            if (Game.isPhysicsRunning()) {
-                // Add the time to the current physics step
-                physicsStep += dt;
-
-                // If the current step is more than the target frame time, calculate the frame
-                // (This actually controls the frame rate)
-                if (physicsStep >= FRAME_TIME) {
-                    // Remove used time from remaining physics time to maintain a fixed time step
-                    physicsStep -= FRAME_TIME;
-                    timestep();
-                    numberOfCalculatedFrames++;
-                }
-            }
-
-            if (TimeUtils.aSecondHasPassedFrom(fpsTimer)) {
-                fpsTimer += CommonConstants.MILLISECONDS_IN_ONE_SECOND;
-                fps = numberOfCalculatedFrames;
-                System.out.printf("Physics FPS: %d\n", fps);
-                numberOfCalculatedFrames = 0;
-            }
+            return true;
+        } else {
+            return false;
         }
     }
 }

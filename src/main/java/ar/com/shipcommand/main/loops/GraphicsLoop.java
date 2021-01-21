@@ -17,9 +17,9 @@ import java.util.Set;
  * The graphic loop is the class that controls frame rate and iterates over all objects and
  * manges its rendering on the main window
  */
-public class GraphicsLoop implements Runnable {
+public class GraphicsLoop extends GameLoop {
     /**
-     * Time for each frame
+     * Time for each frame needed to reach the desired frame rate
      */
     private static final double FRAME_TIME = 1.0 / StaticConfiguration.TARGET_FRAME_RATE;
 
@@ -29,15 +29,15 @@ public class GraphicsLoop implements Runnable {
     private final Set<Renderable> renderables;
 
     /**
-     * Current frames per second for the graphic loop
+     * Current graphics step size in seconds
      */
-    private int fps;
+    private double graphicStep;
 
     /**
      * Creates a new graphic loop
      */
     public GraphicsLoop() {
-        fps = 0;
+        graphicStep = 0.0;
         renderables = new HashSet<>();
     }
 
@@ -56,10 +56,6 @@ public class GraphicsLoop implements Runnable {
      */
     public void remove(Renderable renderable) {
         renderables.remove(renderable);
-    }
-
-    public int getFPS() {
-        return fps;
     }
 
     /**
@@ -86,49 +82,20 @@ public class GraphicsLoop implements Runnable {
         bufferStrategy.show();
     }
 
-
-
-    /**
-     * Runs the graphics loop while the game is running
-     */
     @Override
-    public void run() {
-        // Time step size
-        double dt;
-        // Current graphics step size in seconds
-        double graphicStep = 0;
-        // Store the current time to calculate the time step
-        long lastTime = System.nanoTime();
+    public boolean loop(double dt, long time) {
+        // Add the elapsed time to the current step
+        graphicStep += dt;
 
-        // Used for timing seconds to calculate FPS
-        long fpsTimer = System.currentTimeMillis();
-        // Number of rendered frames inside the current second
-        int numberOfRenderedFrames = 0;
+        // If the current step is more than the target frame time, draw the frame
+        // (This actually controls the frame rate)
+        if (graphicStep >= FRAME_TIME) {
+            renderFrame(graphicStep);
+            graphicStep = 0;
 
-        while (Game.isRunning()) {
-            // Calculate elapsed time and reset last time
-            long now = System.nanoTime();
-            dt = TimeUtils.getElapsedTime(lastTime, now);
-            lastTime = now;
-
-            // Add the elapsed time to the current step
-            graphicStep += dt;
-
-            // If the current step is more than the target frame time, draw the frame
-            // (This actually controls the frame rate)
-            if (graphicStep >= FRAME_TIME) {
-                renderFrame(graphicStep);
-                numberOfRenderedFrames++;
-                graphicStep = 0;
-            }
-
-            // If a second has passed calculate FPS
-            if (TimeUtils.aSecondHasPassedFrom(fpsTimer)) {
-                fpsTimer += CommonConstants.MILLISECONDS_IN_ONE_SECOND;
-                fps = numberOfRenderedFrames;
-                System.out.printf("FPS: %d\n", fps);
-                numberOfRenderedFrames = 0;
-            }
+            return true;
+        } else {
+            return false;
         }
     }
 }
