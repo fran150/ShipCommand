@@ -3,6 +3,7 @@ package ar.com.shipcommand.geo;
 import ar.com.shipcommand.common.CommonConstants;
 import ar.com.shipcommand.geo.exceptions.AmbiguousSolutionException;
 import ar.com.shipcommand.geo.exceptions.InfiniteSolutionsException;
+import ar.com.shipcommand.physics.magnitudes.Bearing;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 
 /**
@@ -53,14 +54,14 @@ public class GeoTools {
      * @return Distance in meters between the given points
      */
     public static Distance getDistance(Geo2DPosition start, Geo2DPosition end) {
-        double φ1 = start.getLatRadians();
-        double φ2 = end.getLatRadians();
+        double phi1 = start.getLatRadians();
+        double phi2 = end.getLatRadians();
 
-        double Δφ = Math.toRadians(end.getLat() - start.getLat());
-        double Δλ = Math.toRadians(end.getLon() - start.getLon());
+        double deltaPhi = Math.toRadians(end.getLat() - start.getLat());
+        double deltaLambda = Math.toRadians(end.getLon() - start.getLon());
 
-        double a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-                   Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+        double a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+                   Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
 
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
@@ -74,13 +75,13 @@ public class GeoTools {
      * @return Bearing in degrees to from the start point to the end
      */
     public static double getBearing(Geo2DPosition start, Geo2DPosition end) {
-        double φ1 = start.getLatRadians();
-        double λ1 = start.getLonRadians();
-        double φ2 = end.getLatRadians();
-        double λ2 = end.getLonRadians();
+        double phi1 = start.getLatRadians();
+        double lambda1 = start.getLonRadians();
+        double phi2 = end.getLatRadians();
+        double lambda2 = end.getLonRadians();
 
-        double y = Math.sin(λ2 - λ1) * Math.cos(φ2);
-        double x = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(λ2 - λ1);
+        double y = Math.sin(lambda2 - lambda1) * Math.cos(phi2);
+        double x = Math.cos(phi1) * Math.sin(phi2) - Math.sin(phi1) * Math.cos(phi2) * Math.cos(lambda2 - lambda1);
 
         return (Math.toDegrees(Math.atan2(y, x)) + 360) % 360;
     }
@@ -88,21 +89,21 @@ public class GeoTools {
     /**
      * Returns a new position calculated given a start position, a bearing and a distance
      * @param start Start position
-     * @param bearing Bearing in degrees
+     * @param bearing Bearing to move
      * @param distance Distance in meters
      * @return New position calculated from the given parameters
      */
-    public static Geo2DPosition movePosition(Geo2DPosition start, double bearing, Distance distance) {
-        double φ = start.getLatRadians();
-        double λ = start.getLonRadians();
+    public static Geo2DPosition movePosition(Geo2DPosition start, Bearing bearing, Distance distance) {
+        double phi = start.getLatRadians();
+        double lambda = start.getLonRadians();
 
-        double θ = Math.toRadians(bearing);
-        double δ = distance.inMeters() / CommonConstants.EARTH_RADIUS;
+        double theta = bearing.getRadians();
+        double delta = distance.inMeters() / CommonConstants.EARTH_RADIUS;
 
-        double φ2 = Math.asin(Math.sin(φ) * Math.cos(δ) + Math.cos(φ) * Math.sin(δ) * Math.cos(θ));
-        double λ2 = λ + Math.atan2(Math.sin(θ) * Math.sin(δ) * Math.cos(φ), Math.cos(δ) - Math.sin(φ) * Math.sin(φ2));
+        double phi2 = Math.asin(Math.sin(phi) * Math.cos(delta) + Math.cos(phi) * Math.sin(delta) * Math.cos(theta));
+        double lambda2 = lambda + Math.atan2(Math.sin(theta) * Math.sin(delta) * Math.cos(phi), Math.cos(delta) - Math.sin(phi) * Math.sin(phi2));
 
-        start.setPositionRadians(φ2, λ2);
+        start.setPositionRadians(phi2, lambda2);
 
         return start;
     }
@@ -116,28 +117,28 @@ public class GeoTools {
      * @return New position relative to the start
      */
     public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DPosition end, Distance distance) {
-        double φ1 = start.getLatRadians();
-        double λ1 = start.getLonRadians();
-        double φ2 = end.getLatRadians();
-        double λ2 = end.getLonRadians();
+        double phi1 = start.getLatRadians();
+        double lambda1 = start.getLonRadians();
+        double phi2 = end.getLatRadians();
+        double lambda2 = end.getLonRadians();
 
-        double cosφ1 = Math.cos(φ1);
-        double sinφ1 = Math.sin(φ1);
-        double cosφ2 = Math.cos(φ2);
+        double cosPhi1 = Math.cos(phi1);
+        double sinPhi1 = Math.sin(phi1);
+        double cosPhi2 = Math.cos(phi2);
 
-        double y = Math.sin(λ2 - λ1) * cosφ2;
-        double x = cosφ1 * Math.sin(φ2) - sinφ1 * cosφ2 * Math.cos(λ2 - λ1);
+        double y = Math.sin(lambda2 - lambda1) * cosPhi2;
+        double x = cosPhi1 * Math.sin(phi2) - sinPhi1 * cosPhi2 * Math.cos(lambda2 - lambda1);
 
-        double θ = Math.atan2(y, x);
-        double δ = distance.inMeters() / CommonConstants.EARTH_RADIUS;
+        double theta = Math.atan2(y, x);
+        double delta = distance.inMeters() / CommonConstants.EARTH_RADIUS;
 
-        double cosδ = Math.cos(δ);
-        double sinδ = Math.sin(δ);
+        double cosDelta = Math.cos(delta);
+        double sinDelta = Math.sin(delta);
 
-        double φ3 = Math.asin(sinφ1 * cosδ + cosφ1 * sinδ * Math.cos(θ));
-        double λ3 = λ1 + Math.atan2(Math.sin(θ) * sinδ * cosφ1, cosδ - sinφ1 * Math.sin(φ3));
+        double phi3 = Math.asin(sinPhi1 * cosDelta + cosPhi1 * sinDelta * Math.cos(theta));
+        double lambda3 = lambda1 + Math.atan2(Math.sin(theta) * sinDelta * cosPhi1, cosDelta - sinPhi1 * Math.sin(phi3));
 
-        start.setPositionRadians(φ3, λ3);
+        start.setPositionRadians(phi3, lambda3);
 
         return start;
     }
@@ -154,75 +155,75 @@ public class GeoTools {
     public static Geo2DPosition intersection(Geo2DPosition p1, double bearing1, Geo2DPosition p2, double bearing2)
         throws AmbiguousSolutionException, InfiniteSolutionsException {
         // Input parameters
-        double φ1 = p1.getLatRadians();
-        double λ1 = p1.getLonRadians();
-        double θ13 = Math.toRadians(bearing1);
+        double phi1 = p1.getLatRadians();
+        double lambda1 = p1.getLonRadians();
+        double theta13 = Math.toRadians(bearing1);
 
-        double φ2 = p2.getLatRadians();
-        double λ2 = p2.getLonRadians();
-        double θ23 = Math.toRadians(bearing2);
+        double phi2 = p2.getLatRadians();
+        double lambda2 = p2.getLonRadians();
+        double theta23 = Math.toRadians(bearing2);
 
-        double Δφ = φ2 - φ1;
-        double Δλ = λ2 - λ1;
+        double deltaPhi = phi2 - phi1;
+        double deltaLambda = lambda2 - lambda1;
 
         // Intersection point
-        double φ3, λ3;
+        double phi3, lambda3;
 
         // Angular dist. p1–p2
-        double δ12 = 2 * Math.asin(
-            Math.sqrt(Math.pow(Math.sin(Δφ / 2), 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Math.pow(Δλ / 2, 2)))
+        double delta12 = 2 * Math.asin(
+            Math.sqrt(Math.pow(Math.sin(deltaPhi / 2), 2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(Math.pow(deltaLambda / 2, 2)))
         );
 
         // Initial / final bearings between points 1 & 2
-        double θa = Math.acos((Math.sin(φ2) - Math.sin(φ1) * Math.cos(δ12)) / (Math.sin(δ12) * Math.cos(φ1)));
-        double θb = Math.acos((Math.sin(φ1) - Math.sin(φ2) * Math.cos(δ12)) / (Math.sin(δ12) * Math.cos(φ2)));
+        double thetaA = Math.acos((Math.sin(phi2) - Math.sin(phi1) * Math.cos(delta12)) / (Math.sin(delta12) * Math.cos(phi1)));
+        double thetaB = Math.acos((Math.sin(phi1) - Math.sin(phi2) * Math.cos(delta12)) / (Math.sin(delta12) * Math.cos(phi2)));
 
-        double θ12;
-        double θ21;
+        double theta12;
+        double theta21;
 
-        if (Math.sin(λ2 - λ1) > 0) {
-            θ12 = θa;
-            θ21 = (2 * Math.PI) - θb;
+        if (Math.sin(lambda2 - lambda1) > 0) {
+            theta12 = thetaA;
+            theta21 = (2 * Math.PI) - thetaB;
         } else {
-            θ12 = (2 * Math.PI) - θa;
-            θ21 = θb;
+            theta12 = (2 * Math.PI) - thetaA;
+            theta21 = thetaB;
         }
 
         // Angle p2 – p1 – p3
-        double α1 = θ13 - θ12;
+        double alpha1 = theta13 - theta12;
         // Angle p1 – p2 – p3
-        double α2 = θ21 - θ23;
+        double alpha2 = theta21 - theta23;
 
         // Infinite solutions
-        if (Math.sin(α1) == 0 && Math.sin(α2) == 0) {
+        if (Math.sin(alpha1) == 0 && Math.sin(alpha2) == 0) {
             throw new InfiniteSolutionsException();
         }
 
         // Ambiguous Solution
-        if ((Math.sin(α1) * Math.sin(α2)) < 0) {
+        if ((Math.sin(alpha1) * Math.sin(alpha2)) < 0) {
             throw new AmbiguousSolutionException();
         }
 
         // Angle p1 – p2 – p3
-        double α3 = Math.acos(-Math.cos(α1) * Math.cos(α2) + Math.sin(α1) * Math.sin(α2) * Math.cos(δ12));
+        double alpha3 = Math.acos(-Math.cos(alpha1) * Math.cos(alpha2) + Math.sin(alpha1) * Math.sin(alpha2) * Math.cos(delta12));
 
         // Angular dist. p1 – p3
-        double δ13 = Math.atan2(
-            Math.sin(δ12) * Math.sin(α1) * Math.sin(α2), Math.cos(α2) + Math.cos(α1) * Math.cos(α3)
+        double delta13 = Math.atan2(
+            Math.sin(delta12) * Math.sin(alpha1) * Math.sin(alpha2), Math.cos(alpha2) + Math.cos(alpha1) * Math.cos(alpha3)
         );
 
         // P3 latitude
-        φ3 = Math.asin(Math.sin(φ1) * Math.cos(δ13) + Math.cos(φ1) * Math.sin(δ13) * Math.cos(θ13));
+        phi3 = Math.asin(Math.sin(phi1) * Math.cos(delta13) + Math.cos(phi1) * Math.sin(delta13) * Math.cos(theta13));
 
         // Longitude p1 – p3
-        double Δλ13 = Math.atan2(
-            Math.sin(θ13) * Math.sin(δ13) * Math.cos(φ1), Math.cos(δ13) - Math.sin(φ1) * Math.sin(φ3)
+        double deltaLambda13 = Math.atan2(
+            Math.sin(theta13) * Math.sin(delta13) * Math.cos(phi1), Math.cos(delta13) - Math.sin(phi1) * Math.sin(phi3)
         );
-        λ3 = λ1 + Δλ13;
+        lambda3 = lambda1 + deltaLambda13;
 
         // Create new position
         Geo2DPosition intersect = new Geo2DPosition();
-        intersect.setPositionRadians(φ3, λ3);
+        intersect.setPositionRadians(phi3, lambda3);
 
         return intersect;
     }

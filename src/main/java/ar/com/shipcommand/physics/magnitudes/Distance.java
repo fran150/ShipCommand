@@ -1,7 +1,7 @@
 package ar.com.shipcommand.physics.magnitudes;
 
 /**
- * Represents distances between objects
+ * Used to represent distances in various units
  */
 public class Distance {
     /**
@@ -18,7 +18,6 @@ public class Distance {
 
     /**
      * Creates a new distance object
-     *
      * @param m Distance in meters
      */
     public Distance(double m) {
@@ -27,7 +26,6 @@ public class Distance {
 
     /**
      * Creates a new distance object
-     *
      * @param distance Distance magnitude
      * @param unit Unit of the specified distance
      */
@@ -53,7 +51,6 @@ public class Distance {
 
     /**
      * Gets the current distance
-     *
      * @return Distance in meters
      */
     public double inMeters() {
@@ -62,7 +59,6 @@ public class Distance {
 
     /**
      * Sets the current distance
-     *
      * @param m Distance in meters
      */
     public void setMeters(double m) {
@@ -117,10 +113,10 @@ public class Distance {
     /**
      * Sets the current distance
      *
-     * @param yrds Distance in yards
+     * @param yards Distance in yards
      */
-    public void setYards(double yrds) {
-        current = yrds / 1.094;
+    public void setYards(double yards) {
+        current = yards / 1.094;
     }
 
     /**

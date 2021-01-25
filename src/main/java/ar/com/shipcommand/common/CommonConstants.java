@@ -32,5 +32,4 @@ public class CommonConstants {
      * Max height of earth
      */
     public static long EARTH_MAX_HEIGHT = 8500;
-
 }

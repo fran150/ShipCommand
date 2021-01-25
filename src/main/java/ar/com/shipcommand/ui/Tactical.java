@@ -7,6 +7,7 @@ import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
 import ar.com.shipcommand.geo.Geo2DPosition;
 import ar.com.shipcommand.geo.HeightMap;
+import ar.com.shipcommand.physics.magnitudes.Bearing;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 import ar.com.shipcommand.physics.magnitudes.DistanceUnits;
 import ucar.ma2.InvalidRangeException;
@@ -17,6 +18,16 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class Tactical implements Renderable {
+    private static final double NORTH = 0.0;
+    private static final double SOUTH = 180.0;
+    private static final double EAST = 90.0;
+    private static final double WEST = 270.0;
+
+    private static final double NORTH_WEST_DEGREES = 315.0;
+    private static final double NORTH_EAST_DEGREES = 45.0;
+    private static final double SOUTH_WEST_DEGREES = 225;
+    private static final double SOUTH_EAST_DEGREES = 135.0;
+
     // Height map file reader
     HeightMap heightMap;
 
@@ -83,10 +94,10 @@ public class Tactical implements Renderable {
         lowerLeft = new Geo2DPosition(center);
         lowerRight = new Geo2DPosition(center);
 
-        upperLeft.move(315, diagonalSize);
-        upperRight.move(45, diagonalSize);
-        lowerLeft.move(225, diagonalSize);
-        lowerRight.move(135, diagonalSize);
+        upperLeft.move(new Bearing(NORTH_WEST_DEGREES), diagonalSize);
+        upperRight.move(new Bearing(NORTH_EAST_DEGREES), diagonalSize);
+        lowerLeft.move(new Bearing(SOUTH_WEST_DEGREES), diagonalSize);
+        lowerRight.move(new Bearing(SOUTH_EAST_DEGREES), diagonalSize);
     }
 
     /**
@@ -153,25 +164,25 @@ public class Tactical implements Renderable {
         Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.NauticalMiles);
 
         if (KeyHandler.isDown(KeyEvent.VK_D)) {
-            center.move(90, d);
+            center.move(new Bearing(EAST), d);
             calculateCorners();
             map = null;
         }
 
         if (KeyHandler.isDown(KeyEvent.VK_W)) {
-            center.move(0, d);
+            center.move(new Bearing(NORTH), d);
             calculateCorners();
             map = null;
         }
 
         if (KeyHandler.isDown(KeyEvent.VK_A)) {
-            center.move(270, d);
+            center.move(new Bearing(WEST), d);
             calculateCorners();
             map = null;
         }
 
         if (KeyHandler.isDown(KeyEvent.VK_S)) {
-            center.move(180, d);
+            center.move(new Bearing(SOUTH), d);
             calculateCorners();
             map = null;
         }

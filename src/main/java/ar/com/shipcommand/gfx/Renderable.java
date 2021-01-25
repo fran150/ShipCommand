@@ -8,7 +8,6 @@ import java.awt.*;
 public interface Renderable {
     /**
      * Method called when needed to update the object's render state
-     *
      * @param dt Time elapsed from previous time step
      * @param graphics Graphics object reference
      */

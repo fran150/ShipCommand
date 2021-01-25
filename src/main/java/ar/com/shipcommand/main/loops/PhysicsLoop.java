@@ -1,10 +1,7 @@
 package ar.com.shipcommand.main.loops;
 
-import ar.com.shipcommand.common.CommonConstants;
 import ar.com.shipcommand.common.config.StaticConfiguration;
-import ar.com.shipcommand.main.Game;
 import ar.com.shipcommand.main.GameObject;
-import ar.com.shipcommand.utils.TimeUtils;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,5 +1,6 @@
 package ar.com.shipcommand.geo;
 
+import ar.com.shipcommand.physics.magnitudes.Bearing;
 import ar.com.shipcommand.physics.magnitudes.Distance;
 
 /**
@@ -55,12 +56,24 @@ public class Geo2DPosition {
      */
     public void setLat(double lat) {
         double absLatitude = Math.abs(lat % 360);
-        if (absLatitude > 90 && absLatitude <= 180) absLatitude = 180 - absLatitude;
-        if (absLatitude > 180 && absLatitude <= 270) absLatitude = lat - 180;
-        if (absLatitude > 270 && absLatitude <= 360) absLatitude = 360 - lat;
 
-        if (lat > 0) this.lat = absLatitude;
+        absLatitude = getLatitudeFromCircularAngle(absLatitude);
+
+        if (lat >= 0) this.lat = absLatitude;
         if (lat < 0) this.lat = -absLatitude;
+    }
+
+    /**
+     * Given a right handed angle return the correspondent latitude
+     * @param degrees Degrees of latitude
+     * @return Angular degree transformed to latitude
+     */
+    private double getLatitudeFromCircularAngle(double degrees) {
+        if (degrees > 90 && degrees <= 180) return 180 - degrees;
+        if (degrees > 180 && degrees <= 270) return degrees - 180;
+        if (degrees > 270 && degrees <= 360) return 360 - degrees;
+
+        return degrees;
     }
 
     /**
@@ -70,9 +83,21 @@ public class Geo2DPosition {
      */
     public void setLon(double lon) {
         double absLongitude = lon % 360;
-        if (absLongitude > 180) absLongitude -= 360;
-        if (absLongitude < -180) absLongitude += 360;
+
+        absLongitude = getLongitudeFromCircularAngle(absLongitude);
+
         this.lon = absLongitude;
+    }
+
+    /**
+     * Given a right hand angle returns the correspondent longitude
+     * @param degrees Degrees of longitude
+     * @return Angular degrees transformed to longitude
+     */
+    private double getLongitudeFromCircularAngle(double degrees) {
+        if (degrees > 180) return degrees - 360;
+        if (degrees < -180) return degrees + 360;
+        return degrees;
     }
 
     /**
@@ -150,7 +175,7 @@ public class Geo2DPosition {
      * @param course Course in degrees from north
      * @param distance Distance to move
      */
-    public void move(double course, Distance distance) {
+    public void move(Bearing course, Distance distance) {
         GeoTools.movePosition(this, course, distance);
     }
 

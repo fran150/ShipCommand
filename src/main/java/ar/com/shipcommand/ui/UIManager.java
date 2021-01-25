@@ -2,6 +2,7 @@ package ar.com.shipcommand.ui;
 
 import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.main.loops.GameLoopsManager;
+import ar.com.shipcommand.ui.map.*;
 import lombok.SneakyThrows;
 
 public class UIManager {

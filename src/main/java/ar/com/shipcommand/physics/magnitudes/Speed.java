@@ -15,7 +15,6 @@ public class Speed {
 
     /**
      * Creates an speed object
-     *
      * @param kmh current speed in kilometers per hour
      */
     public Speed(double kmh) {
@@ -24,7 +23,6 @@ public class Speed {
 
     /**
      * Creates a new speed object
-     *
      * @param speed Current speed
      * @param unit Specified speed unit
      */
@@ -47,7 +45,6 @@ public class Speed {
 
     /**
      * Gets the current speed
-     *
      * @return speed in kilometers per hour
      */
     public double inKilometersPerHour() {
@@ -56,7 +53,6 @@ public class Speed {
 
     /**
      * Sets the current speed
-     *
      * @param kmh speed in kilometers per hour
      */
     public void setKilometersPerHour(double kmh) {
@@ -65,7 +61,6 @@ public class Speed {
 
     /**
      * Gets ths current speed
-     *
      * @return Speed in meters per second
      */
     public double inMetersPerSecond() {
@@ -74,7 +69,6 @@ public class Speed {
 
     /**
      * Sets the current speed
-     *
      * @param ms Speed in meters per second
      */
     public void setMetersPerSecond(double ms) {
@@ -83,7 +77,6 @@ public class Speed {
 
     /**
      * Gets the current speed
-     *
      * @return Speed in knots
      */
     public double inKnots() {
@@ -92,7 +85,6 @@ public class Speed {
 
     /**
      * Sets the current speed
-     *
      * @param kt Speed in knots
      */
     public void setKnots(double kt) {
@@ -101,7 +93,6 @@ public class Speed {
 
     /**
      * Gets the current speed
-     *
      * @return Speed in feet per minute
      */
     public double inFeetPerMinute() {
@@ -110,7 +101,6 @@ public class Speed {
 
     /**
      * Sets the current speed
-     *
      * @param fpm Speed in feet per minute
      */
     public void setFeetPerMinute(double fpm) {
