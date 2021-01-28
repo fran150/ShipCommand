@@ -30,7 +30,7 @@ public class HeightMap {
      * @throws IOException Produced when the system can't read the heights file
      */
     public HeightMap() throws IOException {
-        NetcdfFile file = NetcdfFile.openInMemory(StaticConfiguration.HEIGHT_MAP_FILE);
+        NetcdfFile file = NetcdfFile.open(StaticConfiguration.HEIGHT_MAP_FILE);
         elevation = file.findVariable(StaticConfiguration.HEIGHT_MAP_VARIABLE_NAME);
 
         gridWidth = file.findDimension(StaticConfiguration.HEIGHT_MAP_LONGITUDE_DIMENSION_NAME)

@@ -8,6 +8,6 @@ public class AmbiguousSolutionException extends Exception {
      * Creates an AmbiguousSolutionException object
      */
     public AmbiguousSolutionException() {
-        super("The operations has ambiguous solutions");
+        super("The operation has ambiguous solutions");
     }
 }

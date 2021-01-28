@@ -5,7 +5,7 @@ import ar.com.shipcommand.physics.magnitudes.Distance;
 /**
  * Geographical position with altitude
  */
-public class Geo3DPosition extends Geo2DPosition {
+public class Geo3DPosition extends Geo2DPosition implements Geo3DReadonlyPosition {
     /**
      * Altitude above sea level (or below if negative)
      */
@@ -15,6 +15,7 @@ public class Geo3DPosition extends Geo2DPosition {
      * Gets the altitude over sea level
      * @return Altitude in meters
      */
+    @Override
     public Distance getAltitude() {
         return altitude;
     }
@@ -47,5 +48,13 @@ public class Geo3DPosition extends Geo2DPosition {
     public Geo3DPosition(double lat, double lon, Distance altitude) {
         super(lat, lon);
         this.altitude = altitude;
+    }
+
+    /**
+     * Returns the current position as a readonly magnitude
+     * @return Current position
+     */
+    public Geo3DReadonlyPosition asReadOnly() {
+        return this;
     }
 }

@@ -6,7 +6,7 @@ import ar.com.shipcommand.physics.magnitudes.Distance;
 /**
  * Geographical position of an object
  */
-public class Geo2DPosition {
+public class Geo2DPosition implements Geo2DReadonlyPosition {
     /**
      * Current latitude
      */
@@ -21,6 +21,7 @@ public class Geo2DPosition {
      * Get the current latitude
      * @return Decimal Latitude
      */
+    @Override
     public double getLat() {
         return lat;
     }
@@ -29,6 +30,7 @@ public class Geo2DPosition {
      * Get the current longitude
      * @return Decimal Longitude
      */
+    @Override
     public double getLon() {
         return lon;
     }
@@ -37,6 +39,7 @@ public class Geo2DPosition {
      * Returns current latitude in radians
      * @return Current latitude in radians
      */
+    @Override
     public double getLatRadians() {
         return Math.toRadians(lat);
     }
@@ -45,6 +48,7 @@ public class Geo2DPosition {
      * Returns current longitude in radians
      * @return Current longitude in radians
      */
+    @Override
     public double getLonRadians() {
         return Math.toRadians(lon);
     }
@@ -162,10 +166,27 @@ public class Geo2DPosition {
     }
 
     /**
+     * Creates a writable copy of the specified position
+     * @param position Position to copy
+     */
+    public Geo2DPosition(Geo2DReadonlyPosition position) {
+        copy(position);
+    }
+
+    /**
      * Copies the specified position to this one
      * @param pos Position to copy
      */
     public void copy(Geo2DPosition pos) {
+        this.lat = pos.getLat();
+        this.lon = pos.getLon();
+    }
+
+    /**
+     * Copies the specified position to this one
+     * @param pos Position to copy
+     */
+    public void copy(Geo2DReadonlyPosition pos) {
         this.lat = pos.getLat();
         this.lon = pos.getLon();
     }
@@ -184,7 +205,15 @@ public class Geo2DPosition {
      * @param end Point where the position must be move
      * @param distance Distance to move
      */
-    public void moveTowards(Geo2DPosition end, Distance distance) {
+    public void moveTowards(Geo2DReadonlyPosition end, Distance distance) {
         GeoTools.moveTowards(this, end, distance);
+    }
+
+    /**
+     * Returns the 2D geographical position as a read only magnitude
+     * @return Readonly 2D position
+     */
+    public Geo2DReadonlyPosition asReadOnly() {
+        return this;
     }
 }

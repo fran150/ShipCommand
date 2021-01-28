@@ -14,11 +14,9 @@ class MapZoom {
 
     // Upper left position of the area currently shown
     @Getter
-    @Setter
     private Geo2DPosition upperLeft;
     // Lower right position of the area currently shown
     @Getter
-    @Setter
     private Geo2DPosition lowerRight;
 
     // Zoom area width and height in degrees of latitude and longitude
@@ -37,11 +35,6 @@ class MapZoom {
     private final double mapWidth;
     private final double mapHeight;
 
-    // Generated image
-    @Getter
-    @Setter
-    private BufferedImage map;
-
     /**
      * Creates a new zoom object
      * @param mapWidth Map's width in pixels
@@ -57,7 +50,7 @@ class MapZoom {
     /**
      * Sets the zoom area to the default values (Full world view)
      */
-    void setDefaultZoomArea() {
+    public void setDefaultZoomArea() {
         Geo2DPosition upperLeft = new Geo2DPosition(DEFAULT_UPPER_LEFT_LAT, DEFAULT_UPPER_LEFT_LON);
         Geo2DPosition lowerRight = new Geo2DPosition(DEFAULT_LOWER_RIGHT_LAT, DEFAULT_LOWER_RIGHT_LON);
 
@@ -70,7 +63,7 @@ class MapZoom {
      * @param upperLeft Upper left corner coordinates of the map to show
      * @param lowerRight Lower right corner coordinates of the map to show
      */
-    void setZoomArea(Geo2DPosition upperLeft, Geo2DPosition lowerRight) {
+    public void setZoomArea(Geo2DPosition upperLeft, Geo2DPosition lowerRight) {
         this.upperLeft = upperLeft;
         this.lowerRight = lowerRight;
 
@@ -81,31 +74,16 @@ class MapZoom {
         // Calculate the number of degrees of lat and lon per pixel
         this.lonPerPixel = areaWidth / mapWidth;
         this.latPerPixel = areaHeight / mapHeight;
-
-        this.map = null;
     }
 
     /**
      * Returns if the map is showing the default area
      * @return True if the map is showing the entire world
      */
-    boolean isDefaultArea() {
+    public boolean isDefaultArea() {
         return upperLeft.getLat() == DEFAULT_UPPER_LEFT_LAT
                 && upperLeft.getLon() == DEFAULT_UPPER_LEFT_LON
                 && lowerRight.getLat() == DEFAULT_LOWER_RIGHT_LAT
                 && lowerRight.getLon() == DEFAULT_LOWER_RIGHT_LON;
-    }
-
-    /**
-     * Converts the given screen position to geographical position on the map
-     * @param x X position on the screen
-     * @param y Y position on the screen
-     * @return Geographical position of corresponding point in the screen
-     */
-    Geo2DPosition screenToPos(int x, int y) {
-        double lat = upperLeft.getLat() - (y * latPerPixel);
-        double lon = (x * lonPerPixel) + upperLeft.getLon();
-
-        return new Geo2DPosition(lat, lon);
     }
 }

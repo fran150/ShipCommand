@@ -33,7 +33,8 @@ public class StaticConfiguration {
     /**
      * Heightmap file
      */
-    public static final String HEIGHT_MAP_FILE = "./src/main/resources/GRIDONE_2D.nc";
+    public static final String HEIGHT_MAP_FILE = "./src/main/resources/GEBCO_2014_2D.nc";
+            //"./src/main/resources/GRIDONE_2D.nc";
     /**
      * Height variable name inside the heightmap file
      */

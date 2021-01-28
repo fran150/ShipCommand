@@ -3,7 +3,7 @@ package ar.com.shipcommand.physics.magnitudes;
 /**
  * Used to represent distances in various units
  */
-public class Distance {
+public class Distance implements ReadOnlyDistance {
     /**
      * Distance in meters
      */
@@ -18,10 +18,10 @@ public class Distance {
 
     /**
      * Creates a new distance object
-     * @param m Distance in meters
+     * @param meters Distance in meters
      */
-    public Distance(double m) {
-        current = m;
+    public Distance(double meters) {
+        current = meters;
     }
 
     /**
@@ -53,6 +53,7 @@ public class Distance {
      * Gets the current distance
      * @return Distance in meters
      */
+    @Override
     public double inMeters() {
         return current;
     }
@@ -67,16 +68,15 @@ public class Distance {
 
     /**
      * Gets the current distance
-     *
      * @return Distance in kilometers
      */
+    @Override
     public double inKilometers() {
         return current / 1000;
     }
 
     /**
      * Sets the current distance
-     *
      * @param km Distance in kilometers
      */
     public void setKilometers(double km) {
@@ -85,16 +85,15 @@ public class Distance {
 
     /**
      * Gets the current distance
-     *
      * @return Distance in nautical miles
      */
+    @Override
     public double inNauticalMiles() {
         return current / 1852;
     }
 
     /**
      * Sets the current distance
-     *
      * @param nm Distance in nautical miles
      */
     public void setNauticalMiles(double nm) {
@@ -103,16 +102,15 @@ public class Distance {
 
     /**
      * Gets the current distance
-     *
      * @return Distance in yards
      */
+    @Override
     public double inYards() {
         return current * 1.094;
     }
 
     /**
      * Sets the current distance
-     *
      * @param yards Distance in yards
      */
     public void setYards(double yards) {
@@ -121,19 +119,26 @@ public class Distance {
 
     /**
      * Gets the current distance
-     *
      * @return Distance in feet
      */
+    @Override
     public double inFeet() {
         return current * 3.281;
     }
 
     /**
      * Sets the current distance
-     *
      * @param ft Distance in feet
      */
     public void setFeet(double ft) {
         current = ft / 3.281;
+    }
+
+    /**
+     * Returns distance as a readonly magnitude
+     * @return Read only distance
+     */
+    public ReadOnlyDistance asReadOnly() {
+        return this;
     }
 }

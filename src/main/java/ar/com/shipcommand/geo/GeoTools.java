@@ -116,7 +116,7 @@ public class GeoTools {
      * @param distance Distance to move
      * @return New position relative to the start
      */
-    public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DPosition end, Distance distance) {
+    public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DReadonlyPosition end, Distance distance) {
         double phi1 = start.getLatRadians();
         double lambda1 = start.getLonRadians();
         double phi2 = end.getLatRadians();

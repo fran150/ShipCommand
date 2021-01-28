@@ -2,7 +2,7 @@ package ar.com.shipcommand.ui;
 
 import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.main.loops.GameLoopsManager;
-import ar.com.shipcommand.ui.map.*;
+import ar.com.shipcommand.ui.tactical.Tactical;
 import lombok.SneakyThrows;
 
 public class UIManager {
@@ -14,7 +14,7 @@ public class UIManager {
 
     @SneakyThrows
     public static void initialize() {
-        mainMap = new Map();
+        mainMap = new Tactical();
         GameLoopsManager.getGraphicsLoop().add(mainMap);
     }
 }
