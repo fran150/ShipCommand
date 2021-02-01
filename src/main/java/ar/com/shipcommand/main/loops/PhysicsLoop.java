@@ -39,7 +39,7 @@ public class PhysicsLoop extends GameLoop {
      * @param object Game object to be added
      */
     public void add(GameObject object) {
-        gameObjects.add((GameObject) object);
+        gameObjects.add(object);
     }
 
     /**

@@ -1,7 +1,5 @@
 package ar.com.shipcommand.input;
 
-import lombok.*;
-
 /**
  * Allows to track a button state and perform an action when the button is released
  */

@@ -23,13 +23,32 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Shows an spherical projection unfolded to fit in the window.
  * This is more accurate on high latitudes and high zoom level
  */
 public class Tactical implements Renderable {
+    private static final Map<Integer, Double> validMovementKeys;
+    private static final Map<Integer, Integer> validZoomKeys;
+
+    static {
+        validMovementKeys = new HashMap<>();
+
+        validMovementKeys.put(KeyEvent.VK_W, CommonConstants.NORTH_HEADING);
+        validMovementKeys.put(KeyEvent.VK_S, CommonConstants.SOUTH_HEADING);
+        validMovementKeys.put(KeyEvent.VK_A, CommonConstants.WEST_HEADING);
+        validMovementKeys.put(KeyEvent.VK_D, CommonConstants.EAST_HEADING);
+
+        validZoomKeys = new HashMap<>();
+
+        validZoomKeys.put(KeyEvent.VK_EQUALS, -50);
+        validZoomKeys.put(KeyEvent.VK_MINUS, 50);
+    }
+
     // Height map file reader
     private final HeightMap heightMap;
 
@@ -48,8 +67,7 @@ public class Tactical implements Renderable {
     private final int mapHeight;
 
     /**
-     * Creates a new map
-     *
+     * Creates a new tactical map
      * @throws IOException Thrown if the heightmap NetCDF file is not found
      */
     public Tactical() throws IOException {
@@ -57,30 +75,43 @@ public class Tactical implements Renderable {
         MainWindow win = WindowManager.getMainWindow();
 
         // Get the main window's size
-        mapWidth = win.getWidth() / 3;
-        mapHeight = win.getHeight() / 3;
+        mapWidth = win.getWidth() / 2;
+        mapHeight = win.getHeight() / 2;
 
         heightMap = new HeightMap();
 
         setArea(new Geo2DPosition(0, 0), new Distance(1000, DistanceUnits.NauticalMiles));
     }
 
+    /**
+     * Sets the area to be shown on the tactical map
+     * @param center Geographical position of the tactical map center
+     * @param areaSize Distance to show on the tactical map
+     */
     public void setArea(Geo2DPosition center, Distance areaSize) {
         this.center = center;
         this.areaSize = areaSize;
+        clearMapCache();
     }
 
+    /**
+     * Gets the geographical position of the tactical map center
+     * @return Returns the geographical position of the tactical map center
+     */
     public Geo2DReadonlyPosition getCenterPosition() {
         return center.asReadOnly();
     }
 
+    /**
+     * Gets the size of the area shown in the tactical map
+     * @return Returns the size of the area shown in the tactical map
+     */
     public ReadOnlyDistance getAreaSize() {
         return areaSize.asReadOnly();
     }
 
     /**
      * Draw the map on the screen
-     *
      * @param graphics Graphics object for drawings
      */
     protected void drawMap(Graphics2D graphics) throws IOException, InvalidRangeException {
@@ -150,37 +181,30 @@ public class Tactical implements Renderable {
         graphics.drawImage(map, null, null);
     }
 
+    /**
+     * Clears the current image displayed forcing the draw routine to
+     * redraw a new one
+     */
+    private void clearMapCache() {
+        map = null;
+    }
+
     private void processKeyPress() {
-        Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.NauticalMiles);
+        Set<Integer> pressedKeys = KeyHandler.getPressedKeys();
 
-        if (KeyHandler.isDown(KeyEvent.VK_D)) {
-            center.move(new Bearing(CommonConstants.EAST_HEADING), d);
-            map = null;
+        for (Integer validKey : validMovementKeys.keySet()) {
+            if (KeyHandler.isDown(validKey)) {
+                Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.NauticalMiles);
+                center.move(new Bearing(validMovementKeys.get(validKey)), d);
+                clearMapCache();
+            }
         }
 
-        if (KeyHandler.isDown(KeyEvent.VK_W)) {
-            center.move(new Bearing(CommonConstants.NORTH_HEADING), d);
-            map = null;
-        }
-
-        if (KeyHandler.isDown(KeyEvent.VK_A)) {
-            center.move(new Bearing(CommonConstants.WEST_HEADING), d);
-            map = null;
-        }
-
-        if (KeyHandler.isDown(KeyEvent.VK_S)) {
-            center.move(new Bearing(CommonConstants.SOUTH_HEADING), d);
-            map = null;
-        }
-
-        if (KeyHandler.isDown(KeyEvent.VK_EQUALS)) {
-            areaSize.setNauticalMiles(getAreaSize().inNauticalMiles() - 50);
-            map = null;
-        }
-
-        if (KeyHandler.isDown(KeyEvent.VK_MINUS)) {
-            areaSize.setNauticalMiles(getAreaSize().inNauticalMiles() + 50);
-            map = null;
+        for (Integer validKey : validZoomKeys.keySet()) {
+            if (KeyHandler.isDown(validKey)) {
+                areaSize.setNauticalMiles(getAreaSize().inNauticalMiles() + validZoomKeys.get(validKey));
+                clearMapCache();
+            }
         }
 
         if (areaSize.inNauticalMiles() < 50) {

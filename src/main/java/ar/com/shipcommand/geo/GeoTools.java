@@ -91,9 +91,8 @@ public class GeoTools {
      * @param start Start position
      * @param bearing Bearing to move
      * @param distance Distance in meters
-     * @return New position calculated from the given parameters
      */
-    public static Geo2DPosition movePosition(Geo2DPosition start, Bearing bearing, Distance distance) {
+    public static void movePosition(Geo2DPosition start, Bearing bearing, Distance distance) {
         double phi = start.getLatRadians();
         double lambda = start.getLonRadians();
 
@@ -104,8 +103,6 @@ public class GeoTools {
         double lambda2 = lambda + Math.atan2(Math.sin(theta) * Math.sin(delta) * Math.cos(phi), Math.cos(delta) - Math.sin(phi) * Math.sin(phi2));
 
         start.setPositionRadians(phi2, lambda2);
-
-        return start;
     }
 
     /**
@@ -114,9 +111,8 @@ public class GeoTools {
      * @param start Starting position
      * @param end Destination position
      * @param distance Distance to move
-     * @return New position relative to the start
      */
-    public static Geo2DPosition moveTowards(Geo2DPosition start, Geo2DReadonlyPosition end, Distance distance) {
+    public static void moveTowards(Geo2DPosition start, Geo2DReadonlyPosition end, Distance distance) {
         double phi1 = start.getLatRadians();
         double lambda1 = start.getLonRadians();
         double phi2 = end.getLatRadians();
@@ -139,8 +135,6 @@ public class GeoTools {
         double lambda3 = lambda1 + Math.atan2(Math.sin(theta) * sinDelta * cosPhi1, cosDelta - sinPhi1 * Math.sin(phi3));
 
         start.setPositionRadians(phi3, lambda3);
-
-        return start;
     }
 
 

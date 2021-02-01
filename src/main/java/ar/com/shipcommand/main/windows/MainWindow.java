@@ -5,8 +5,9 @@ import ar.com.shipcommand.input.KeyHandler;
 import ar.com.shipcommand.input.MouseHandler;
 import lombok.Builder;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Canvas;
+import java.awt.Dimension;
 import java.awt.image.BufferStrategy;
 
 /**

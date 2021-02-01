@@ -5,7 +5,7 @@ import ar.com.shipcommand.gfx.Renderable;
 import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
 
-import java.awt.*;
+import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 import java.util.HashSet;
 import java.util.Set;
