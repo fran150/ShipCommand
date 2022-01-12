@@ -11,7 +11,7 @@ import ar.com.shipcommand.main.windows.MainWindow;
 import ar.com.shipcommand.main.windows.WindowManager;
 import ar.com.shipcommand.physics.magnitudes.Bearing;
 import ar.com.shipcommand.physics.magnitudes.Distance;
-import ar.com.shipcommand.physics.magnitudes.DistanceUnits;
+import ar.com.shipcommand.physics.units.DistanceUnits;
 import ar.com.shipcommand.physics.magnitudes.ReadOnlyDistance;
 import ar.com.shipcommand.ui.MapTools;
 import lombok.Getter;
@@ -80,7 +80,7 @@ public class Tactical implements Renderable {
 
         heightMap = new HeightMap();
 
-        setArea(new Geo2DPosition(0, 0), new Distance(1000, DistanceUnits.NauticalMiles));
+        setArea(new Geo2DPosition(0, 0), new Distance(1000, DistanceUnits.nauticalMiles));
     }
 
     /**
@@ -194,7 +194,7 @@ public class Tactical implements Renderable {
 
         for (Integer validKey : validMovementKeys.keySet()) {
             if (KeyHandler.isDown(validKey)) {
-                Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.NauticalMiles);
+                Distance d = new Distance(getAreaSize().inNauticalMiles() / 8, DistanceUnits.nauticalMiles);
                 center.move(new Bearing(validMovementKeys.get(validKey)), d);
                 clearMapCache();
             }

@@ -3,7 +3,7 @@ package ar.com.shipcommand.physics.magnitudes;
 /**
  * Used to represent bearing or courses
  */
-public class Bearing {
+public class Bearing implements ReadOnlyBearing {
     /**
      * Current bearing in degrees
      */
@@ -28,6 +28,7 @@ public class Bearing {
      * Get the current bearing in degrees
      * @return Returns the current bearing in degrees
      */
+    @Override
     public double getDegrees() {
         return current;
     }
@@ -36,6 +37,7 @@ public class Bearing {
      * Get the current bearing in radians
      * @return Returns the current bearing in radians
      */
+    @Override
     public double getRadians() {
         return Math.toRadians(current);
     }

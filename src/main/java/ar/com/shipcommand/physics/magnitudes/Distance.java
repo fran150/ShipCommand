@@ -1,5 +1,7 @@
 package ar.com.shipcommand.physics.magnitudes;
 
+import ar.com.shipcommand.physics.units.DistanceUnits;
+
 /**
  * Used to represent distances in various units
  */
@@ -31,22 +33,30 @@ public class Distance implements ReadOnlyDistance {
      */
     public Distance(double distance, DistanceUnits unit) {
         switch (unit) {
-            case Meters:
+            case meters:
                 setMeters(distance);
                 break;
-            case Kilometers:
+            case kilometers:
                 setKilometers(distance);
                 break;
-            case NauticalMiles:
+            case nauticalMiles:
                 setNauticalMiles(distance);
                 break;
-            case Yards:
+            case yards:
                 setYards(distance);
                 break;
-            case Feet:
+            case feet:
                 setFeet(distance);
                 break;
         }
+    }
+
+    /**
+     * Clones the specified object
+     * @param distance Object to clone
+     */
+    public Distance(Distance distance) {
+        current = distance.inMeters();
     }
 
     /**
